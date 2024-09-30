@@ -51,3 +51,8 @@ export default tseslint.config({
 
 =======
 # bee-a-scholar
+
+## Deploy in firebase
+```
+firebase deploy --only hosting:bee-a-scholar-3a644
+```
