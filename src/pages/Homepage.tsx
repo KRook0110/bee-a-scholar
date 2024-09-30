@@ -1,8 +1,18 @@
+import YellowButton from "@components/YellowButton.tsx"
 
 export default function Homepage() {
     return (
         <>
-            <h1 className="text-red-900">Homepage</h1>
+            <div className="flex flex-col items-center justify-center h-screen">
+
+                <YellowButton
+                    width="200px"
+                    height="100px"
+                    onClick={() => { console.log("Hello, World") }} >
+                    Hello Wolrd
+                </ YellowButton>
+
+            </div>
         </>
     )
 

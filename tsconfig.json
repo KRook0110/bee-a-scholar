@@ -1,19 +1,18 @@
 {
     "compilerOptions": {
-        "baseUrl": ".",
+        "baseUrl": "./src",
         "paths": {
-            "@/*": [
-                "src/*",
-            ],
             "@components/*": [
-                "./src/components/*",
-            ],
-            "@pages/*": [
-                "./src/pages/*",
-            ],
+                "components/*"
+            ]
         },
     },
-    "files": [ ],
+    "include": [
+        "src/**/*"
+    ],
+    "exclude": [
+        "node_modules"
+    ],
     "references": [
         {
             "path": "./tsconfig.app.json"
