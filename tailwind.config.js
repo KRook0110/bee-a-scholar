@@ -10,7 +10,7 @@ export default {
     },
     extend: {
       borderRadius: {
-        button: "8px",
+        DEFAULT: "8px",
       },
       colors: {
         primary: {
@@ -28,6 +28,7 @@ export default {
         //     900 :
         // }
         background: colors.neutral,
+        alert: colors.red,
       },
     },
   },

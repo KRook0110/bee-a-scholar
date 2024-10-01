@@ -12,7 +12,7 @@ function YellowButton({ height = "45px", width = "215px", onClick, fill = false,
 
     return (<>
         <div onClick={onClick}
-            className={`rounded-button font-display font-bold text-[16px] text-white flex flex-col items-center justify-center border-[3px] border-secondary ${fill?"bg-secondary":"bg-secondary/[0.2]"}`}
+            className={`rounded font-display font-bold text-[16px] text-white flex flex-col items-center justify-center border-[3px] border-secondary ${fill?"bg-secondary":"bg-secondary/[0.2]"}`}
             style={{ width: width, height: height }} >
             {children}
         </div>
