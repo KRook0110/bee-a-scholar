@@ -1,0 +1,7 @@
+{
+  "firestore": {
+    "site": "bee-a-scholar-3a644",
+    "rules": "firestore.rules",
+    "indexes": "firestore.indexes.json"
+  }
+}
