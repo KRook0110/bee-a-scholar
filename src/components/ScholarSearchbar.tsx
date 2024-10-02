@@ -13,13 +13,13 @@ interface Props {
 function ScholarSearchbar({
     placeHolder = "Search",
     width = "300px",
-    height = "45px",
+    height = "40px",
     onChange
 }:Props) {
 
    return (
        <div
-            className="bg-background-100 rounded-full shadow-[inset_3px_3px_6px_0_rgba(0_0_0/0.25)] flex flex-row items-center justify-between"
+            className="bg-background-100 rounded-full shadow-[inset_2px_2px_4px_0_rgba(0_0_0/0.25)] flex flex-row items-center justify-between"
             style={{width: width, height: height}}>
             <input
                 placeholder={placeHolder}

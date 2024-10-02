@@ -1,15 +1,19 @@
-import {useState} from "react"
-
-import ScholarSearchbar from "@components/ScholarSearchbar"
+import React, { useState } from "react"
+import NavbarDashboard from "../components/NavbarDashboard"
+import PhoneInputBox from "../components/PhoneInputBox";
+import TextBox from "../components/TextBox";
 
 export default function Homepage() {
-    const [text, setText] = useState("");
+    const [value, setValue] = useState('');
     return (
         <>
-            <div className="flex flex-col items-center justify-center h-screen">
-                <ScholarSearchbar onChange={(e) => {setText(e.target.value)}}/>
-                <h1>Text : {text}</h1>
+            <NavbarDashboard />
+            <div className="flex flex-col items-center justify-center h-screen w-[]">
+                <TextBox onChange={()=>{}}/>
+                <PhoneInputBox onChange={(e)=>{setValue(e.target.value)}} width="400px" title="testing"/>
+            <h1>Text : {value}</h1>
             </div>
+
         </>
     )
 }

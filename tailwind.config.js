@@ -11,6 +11,7 @@ export default {
     extend: {
       borderRadius: {
         DEFAULT: "8px",
+        lg: "16px"
       },
       colors: {
         primary: {

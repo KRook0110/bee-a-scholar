@@ -7,6 +7,7 @@ import "@/index.css";
 import Homepage from '@pages/Homepage';
 import NotFoundPage from '@pages/NotFoundPage';
 import "@/App.css"
+import InputTemplate from './components/InputTemplate';
 
 
 const router = createBrowserRouter([
