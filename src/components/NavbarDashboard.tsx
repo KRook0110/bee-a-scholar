@@ -9,7 +9,7 @@ function NavbarDashboard() {
             <div className="flex flex-row items-center justify-start gap-[15px]">
                 <img src={window.document.URL + "/images/logo/bee-a-scholar-logo.svg"} alt="logo"/>
                 <h1 className="font-display text-2xl font-bold">
-                    Bee-a-Scholar
+                    Bee-a-scholar
                 </h1>
             </div>
             {/* right */}
