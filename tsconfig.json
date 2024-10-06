@@ -7,12 +7,15 @@
             ],
             "@components/*": [
                 "components/*"
+            ],
+            "@lib/*": [
+                "lib/*"
             ]
         },
     },
     "include": [
         "src/**/*"
-    ],
+, "public/images/misc_assets/landingPhone.tsx"    ],
     "exclude": [
         "node_modules"
     ],

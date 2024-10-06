@@ -9,11 +9,12 @@ import NotFoundPage from '@pages/NotFoundPage';
 import "@/App.css"
 import InputTemplate from './components/InputTemplate';
 
+import LandingPage from '@pages/LandingPage';
 
 const router = createBrowserRouter([
     {
         path: "/",
-        element: <Homepage />,
+        element: <LandingPage />,
         errorElement: <NotFoundPage />,
     },
 ])

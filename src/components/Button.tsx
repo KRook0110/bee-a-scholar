@@ -19,7 +19,7 @@ function Button({ height = "45px", width = "215px", onClick, fill = true, type="
 
                 ${fill ? "":"text-secondary justify-center border-[3px] border-secondary border-[3] bg-secondary/[0.2]"}
 
-                active:bg-secondary-dark active:shadow-inner`}
+                hover:bg-secondary-dark hover:transition-colors active:bg-secondary-dark active:shadow-inner`}
             style={{ width: width, height: height }} >
             {children}
         </div>
