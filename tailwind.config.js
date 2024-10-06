@@ -17,20 +17,26 @@ export default {
   			sm: 'calc(var(--radius) - 4px)'
   		},
   		colors: {
-  			primary: {
-  				light: '#3089D6',
-  				DEFAULT: 'hsl(var(--primary))',
-  				dark: '#03081B',
-  				foreground: 'hsl(var(--primary-foreground))'
-  			},
-  			secondary: {
-  				light: '#FFD690',
-  				DEFAULT: 'hsl(var(--secondary))',
-  				dark: '#EDA740',
-  				foreground: 'hsl(var(--secondary-foreground))'
-  			},
-  			background: 'hsl(var(--background))',
-  			alert: 'colors.red',
+        primary: {
+          light: "#3089D6",
+          DEFAULT: "#1C429A",
+          dark: "#03081B",
+        },
+        secondary: {
+          light: "#FFD690",
+          DEFAULT: "#FFBD5A", 
+          dark: "#EDA740",
+        },
+        lightBlue: {
+          DEFAULT: "#63B8F6",
+        },
+        // background: {
+        //     DEFAULT: "#f5f5f5",
+        //     900 :
+        // }
+        background: colors.neutral,
+        alert: colors.red,
+       
   			foreground: 'hsl(var(--foreground))',
   			card: {
   				DEFAULT: 'hsl(var(--card))',
