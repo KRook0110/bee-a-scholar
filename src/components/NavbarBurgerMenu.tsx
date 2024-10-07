@@ -1,6 +1,6 @@
 import React, { useState } from "react"
-import Honeycomb from '../assets/svgs/Honeycomb'
-import Button from "./Button";
+import Honeycomb from "../../public/images/icons/Honeycomb"
+import Button from "./Button"
 
 interface Props {
     width?: string,
@@ -53,7 +53,7 @@ function NavbarBurgerMenu({
                     </svg>
                     
                     <h3 className="font-display flex flex-row space-x-1.5 mt-3">
-                        <Honeycomb/>
+                        <Honeycomb height={22} width={22}/>
                         <span className="font-medium">Hello, </span><span className="font-bold">Derren Malaka!</span>
                     </h3>
 
@@ -126,7 +126,7 @@ function NavbarBurgerMenu({
                             <li>
                                 <a className="flex flex-row space-x-2 items-center font-display" href="">
                                     <span>
-                                        <Honeycomb/>       
+                                        <Honeycomb height={22} width={22}/>       
                                     </span>
                                     <span>
                                         About Us

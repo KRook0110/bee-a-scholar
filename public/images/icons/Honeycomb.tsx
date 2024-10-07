@@ -1,7 +1,11 @@
 import React from 'react';
 
-const Honeycomb: React.FC<{ className?: string }> = ({ className }) => (
-  <svg className={className} width="23" height="22" fill="none" viewBox="0 0 23 22">
+const Honeycomb: React.FC<{ 
+  className?: string,
+  height: number,
+  width: number
+}> = ({className, height, width}) => (
+  <svg className={className} width={width} height={height} fill="none" viewBox="0 0 23 22">
     <path fill="url(#a)" d="M0 0h22v22H0z" transform="matrix(-1 0 0 1 22.5 0)"/>
                             <defs>
                             <pattern id="a" width="1" height="1" patternContentUnits="objectBoundingBox">

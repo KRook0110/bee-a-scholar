@@ -6,7 +6,7 @@ import React from "react"
 interface Props {
     placeHolder?: string,
     width?: string,
-    height?: string
+    height?: string,
     onChange: (e: React.ChangeEvent<HTMLInputElement>)=>void,
 }
 

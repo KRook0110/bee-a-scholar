@@ -9,13 +9,12 @@
                 "./src/pages/*"
             ],
             "@components/*": [
-                "./src/components/*"
             ]
         },
     },
     "include": [
         "src/**/*"
-    ],
+, "public/images/misc_assets/landingPhone.tsx"    ],
     "exclude": [
         "node_modules"
     ],
