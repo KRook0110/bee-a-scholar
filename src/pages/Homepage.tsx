@@ -33,6 +33,13 @@ export default function Homepage() {
                 <h1>Text : {value}</h1>
             </div>
 
+=======
+            <h1>Test</h1>
         </>
     )
 }
+            // <NavbarDashboard />
+            // <div className="flex flex-col items-center justify-center h-screen w-[]">
+            //     <Testing />
+            // <h1>Text : {value}</h1>
+            // </div>
