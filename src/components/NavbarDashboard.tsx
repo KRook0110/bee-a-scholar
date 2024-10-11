@@ -16,7 +16,7 @@ function NavbarDashboard( {type = "default"}: Props) {
        }`}>
             {/* left */}
             <div className="flex flex-row items-center justify-start gap-[15px]">
-                <img src={window.document.URL + "/images/logo/bee-a-scholar-logo.svg"} alt="logo"/>
+                <img className="w-[50px]" src={window.location.origin + "/images/logo/logo_black.png"} alt="logo"/>
                 <h1 className={`font-display text-2xl font-bold 
                     ${type === "default" ? "text-black" : "text-white"}`}>
                     Bee-a-Scholar <span className={`${type === "pro" ? "visible text-black" : "invisible"}`}>PRO</span>

@@ -60,6 +60,7 @@ const Carousel = React.forwardRef<
       {
         ...opts,
         axis: orientation === "horizontal" ? "x" : "y",
+        loop: true, 
       },
       plugins
     )
@@ -214,7 +215,9 @@ const CarouselPrevious = React.forwardRef<
       onClick={scrollPrev}
       {...props}
     >
-      <ArrowLeft className="h-4 w-4" />
+      <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 34 30">
+        <path fill="#fff" d="M33.625 15a2.687 2.687 0 0 0-2.688-2.688H9.652l7.06-7.059a2.688 2.688 0 0 0-3.799-3.798L1.267 13.1a2.687 2.687 0 0 0 0 3.798l11.646 11.646a2.687 2.687 0 0 0 3.799-3.798l-7.06-7.06h21.285A2.688 2.688 0 0 0 33.625 15Z"/>
+      </svg>
       <span className="sr-only">Previous slide</span>
     </Button>
   )
@@ -243,7 +246,9 @@ const CarouselNext = React.forwardRef<
       onClick={scrollNext}
       {...props}
     >
-      <ArrowRight className="h-4 w-4" />
+      <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" width="34" height="30" fill="none" viewBox="0 0 34 30">
+        <path fill="#fff" d="M.375 15a2.688 2.688 0 0 1 2.688-2.688h21.285l-7.06-7.059a2.687 2.687 0 0 1 3.799-3.798L32.733 13.1a2.687 2.687 0 0 1 0 3.798L21.087 28.545a2.687 2.687 0 0 1-3.799-3.798l7.06-7.06H3.063A2.687 2.687 0 0 1 .374 15Z"/>
+      </svg>
       <span className="sr-only">Next slide</span>
     </Button>
   )

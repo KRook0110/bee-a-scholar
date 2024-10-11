@@ -5,6 +5,14 @@ import NavbarDashboard from "../components/NavbarDashboard"
 import Button from "../components/Button";
 import TextBox from "../components/TextBox";
 import Honeycomb from "../../public/images/icons/Honeycomb";
+import {
+    Carousel,
+    CarouselContent,
+    CarouselItem,
+    CarouselNext,
+    CarouselPrevious,
+  } from "@/components/ui/carousel"
+import Autoplay from "embla-carousel-autoplay";
 
 export default function LandingPage(){
     return (
@@ -198,7 +206,7 @@ export default function LandingPage(){
             </section>
 
             {/* CTA + carousel section */}
-            <section className="flex flex-row items-center w-full space-x-2 px-20"
+            <section className="flex flex-col items-center justify-center w-full space-y-20 px-20"
                 style={{
                     position: "relative",
                     width: "100%",
@@ -210,8 +218,57 @@ export default function LandingPage(){
             >
 
                 {/* carousel section */}
-                <div>
+                <div className="flex flex-col items-center justify-center w-full space-y-">
+                    <div className="flex flex-col items-center justify-center">
+                        <div className="flex flex-row items-center justify-center space-x-4">
+                            <span><Honeycomb height={41} width={41}/></span>
+                            <h3 className="font-display font-[600] text-[40px] text-white">What students have to say</h3>
+                        </div>
+                        <p className="font-display text-[20px] text-white">Spoiler alert: <b>A lot of good things!</b></p>
+                    </div>
                     
+                    <div className="pt-5 w-[50vw]">
+                        <Carousel plugins={[
+                                // Autoplay({
+                                // delay: 5000,
+                                // }),
+                        ]} className="drop-shadow-md">
+                            <CarouselContent>
+                                {[...Array(3)].map((_, i) => (
+                                    <CarouselItem key={i}>
+                                        <div className="px-6 w-full flex flex-row items-center justify-center space-x-5 bg-white rounded-3xl">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="30vw" height="20vw" fill="none" viewBox="0 0 176 176">
+                                                <circle cx="88" cy="88" r="88" fill="#D9D9D9"/>
+                                        </svg>
+                                        <div className="flex flex-col items-start">
+                                            <p className="font-display text-black">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.”</p>
+                                            <p className="font-display text-black"><b>Adeline Charlotte Augustinne,</b><br/>Recipient of ABC Scholarship</p>
+                                        </div>
+                                    </div>
+                                </CarouselItem>
+                            ))}
+                            </CarouselContent>
+                            <CarouselPrevious />
+                            <CarouselNext />
+                        </Carousel>
+                    </div>
+                </div>
+
+
+                {/* CTA section */}
+                <div className="flex flex-col columns-2 w-[100vw] bg-white">
+                    <div className="pl-[14vw]">
+                        <img src="../../public/images/logo/logo_black.png" className="absolute bottom-[5vh] h-[50vh]" alt="" />
+                    </div>
+                    <div className="flex flex-col items-center space-y-2 py-10 pl-[27vw]">
+                        <div className="flex flex-row items-center space-x-7">
+                            <span><Honeycomb height={97} width={97}/></span>
+                            <h3 className="font-display text-[40px] leading-[40px]"><b>Unlock Your Future<br></br>with Bee-a-Scholar</b></h3>
+                        </div>
+                        <p className="font-display font-[400] text-center text-black"><b>Start your scholarship search today!</b><br/>
+                        Sign up for an account now, for completely free.</p>
+                        <Button textColor="black" children="GET STARTED"></Button>
+                    </div>
                 </div>
 
             </section>

@@ -6,14 +6,15 @@ interface Props {
     onClick?: () => void,
     fill?: boolean,
     type?: string,
+    textColor?: string,
     children: ReactNode,
 };
 
-function Button({ height = "45px", width = "215px", onClick, fill = true, type="yellow", children}: Props) {
+function Button({ height = "45px", width = "215px", onClick, fill = true, type="yellow", textColor = "white", children}: Props) {
 
     return (<>
         <div onClick={onClick}
-            className={`cursor-pointer rounded font-display font-bold text-[16px] text-white flex flex-col items-center justify-center
+            className={`cursor-pointer rounded font-display font-bold text-[16px] text-${textColor} flex flex-col items-center justify-center
                 ${type==="gold" ?
                     `bg-gradient-to-r from-[#E89110] to-[#FFBD5A] drop-shadow-[1px_6px_7px_rgba(255,214,144,1)] text-white`:"bg-secondary"}                
 
