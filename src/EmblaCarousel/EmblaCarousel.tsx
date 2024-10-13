@@ -8,6 +8,7 @@ import {
 } from './EmblaCarouselArrowButtons'
 import Autoplay from 'embla-carousel-autoplay'
 import useEmblaCarousel from 'embla-carousel-react'
+import Honeycomb from '../../public/images/icons/Honeycomb'
 
 type PropType = {
   slides: number[]
@@ -43,21 +44,41 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
   } = usePrevNextButtons(emblaApi, onNavButtonClick)
 
   return (
-    <section className="embla bg-yellow-200">
+    <section className="embla bg-[#1c5acb]">
+      <div className='absolute space-x-2 px-20 py-7 flex flex-row items-center z-20'>
+        <Honeycomb height={22} width={22}/>
+        <h3 className="font-display font-semibold text-2xl text-white">Featured</h3>
+      </div>
+
       <div className="embla__viewport" ref={emblaRef}>
         <div className="embla__container">
           {slides.map((index) => (
             <div className="embla__slide" key={index}>
-              <div className="embla__slide__number">{index + 1}</div>
+              <div className="embla__slide__number z-0">
+                <img className="embla__img" src="https://www.doubledtrailers.com/wp-content/uploads/2023/10/random-horse-facts-shareable.png" alt="" />
+                
+                <div className='absolute flex flex-row gap-3 left-[8vw] bottom-[5vw] z-20'>
+                  <p className="font-display text-white text-3xl">
+                    Beasiswa Goofy Ahh
+                  </p>
+                  <p className="font-display text-white text-2xl">
+                    |
+                  </p>
+                  <p className="font-display text-white text-2xl">
+                    Lorem ipsum dolor sit amet.
+                  </p>
+                </div>
+              
+              </div>
             </div>
           ))}
         </div>
-        
+
         <div className="embla__controls relative">
           <div className={`absolute top-[calc(-470px/2)] left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full`}>
             <div className="flex flex-row justify-between">
-                <PrevButton onClick={onPrevButtonClick} disabled={prevBtnDisabled} />
-                <NextButton onClick={onNextButtonClick} disabled={nextBtnDisabled} />
+                <PrevButton onClick={onPrevButtonClick} disabled={false} />
+                <NextButton onClick={onNextButtonClick} disabled={false} />
             </div>
           </div>
         </div>

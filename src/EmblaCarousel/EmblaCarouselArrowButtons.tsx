@@ -24,12 +24,18 @@ import React, {
       if (!emblaApi) return
       emblaApi.scrollPrev()
       if (onButtonClick) onButtonClick(emblaApi)
+
+      // debugging
+      // console.log("Prev");
     }, [emblaApi, onButtonClick])
   
     const onNextButtonClick = useCallback(() => {
       if (!emblaApi) return
       emblaApi.scrollNext()
       if (onButtonClick) onButtonClick(emblaApi)
+
+      // debugging
+      // console.log("Next");
     }, [emblaApi, onButtonClick])
   
     const onSelect = useCallback((emblaApi: EmblaCarouselType) => {

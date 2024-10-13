@@ -29,7 +29,7 @@ export default function Homepage() {
                         style={{
                             position: "absolute",
                             bottom: "160px",
-                            width: "100%"
+                            width: "100%",
                         }}
                     >
                         <path fill="#fff" d="m0 53.4 80-5.924c80-6.035 240-17.717 400-13.35C640 38.659 800 59.24 960 66.75c160 7.51 320 1.39 400-1.474l80-2.976V89H0V53.4Z"/>
