@@ -15,13 +15,13 @@ function CategoryContainer({
 }: Props) {
    return (
        <div
-        className="flex flex-col items-center justify-center relative drop-shadow-lg"
+        className="flex flex-col items-center justify-center relative drop-shadow-lg p-7"
         style={{width: width, height: height}} >
             <div
-                className="w-full h-[140px] absolute bg-primary rounded-[30px] z-0 bottom-2"
+                className="w-[95%] h-[150px] absolute bg-primary rounded-[60px] z-0 bottom-2"
             ></div>
-            <img src={window.document.URL + imageURL} alt={imageURL} className="z-10"/>
-            <h1 className="font-display z-10  text-xl font-bold mt-[20px] text-white">{bodyText}</h1>
+            <img src={window.document.URL + imageURL} alt={imageURL} className="z-10 h-[170px]"/>
+            <h1 className="font-display z-10 text-center text-lg font-bold mt-[20px] text-white">{bodyText}</h1>
        </div>
    )
 }

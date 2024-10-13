@@ -2,6 +2,8 @@ import React, { useState } from "react"
 import StarRating from "./StarRating";
 
 interface Props {
+    title: string,
+
     imageURL?: string,
     imageHeight?: string,
     status?: 'none' | 'new' | 'trending',
@@ -9,11 +11,11 @@ interface Props {
     stars?: number, // percent 0% - 100%
     width?: string,
     height?: string,
-    title: string,
     lastUpdated?: Date,
     deadline?: Date,
+    
     onClick: ()=>void,
-    onClickPin?: (e: React.MouseEvent<HTMLImageElement, MouseEvent>) => void,
+    onClickPin?: (e: React.MouseEvent<HTMLImageElement, MouseEvent>) => void
 }
 
 function handlePinToggle(pinState: boolean) {
@@ -21,14 +23,14 @@ function handlePinToggle(pinState: boolean) {
 }
 
 function ScholarCard({
+    title,
+    stars = 0,
     imageURL = "/images/placeholders/card_placeholder.svg",
     imageHeight = "180px",
     status = 'none',
     isPinned,
-    stars = 0,
     width = "300px",
     height = "270px",
-    title,
     onClick,
     lastUpdated = new Date(), // gets the current date
     deadline = new Date(),
@@ -39,9 +41,10 @@ function ScholarCard({
     const deadlineToday = (deadline.setHours(0, 0, 0, 0) == (new Date()).setHours(0, 0, 0, 0));
     const updatedToday = (lastUpdated.setHours(0, 0, 0, 0) == (new Date()).setHours(0, 0, 0, 0));
     return (
-        <div className="relative">
+        
+        <div className="flex relative justify-center items-center my-6 mx-5" style={{ width: width, height:"300px" }}>
             <div
-                className="rounded-lg bg-background-50 drop-shadow-xl overflow-hidden"
+                className="rounded-3xl bg-background-50 drop-shadow-xl overflow-hidden"
                 style={{ width: width, height: height }}
             >
                 {/* Scholar Poster/Image */}
@@ -51,6 +54,7 @@ function ScholarCard({
                     style={{ height: imageHeight }}
                     onClick={onClick}
                     className="cursor-pointer w-full rounded-lg object-cover bg-background-300" />
+                
 
                 {/* Information */}
                 <div className="flex flex-col items-start justify-start w-full h-full px-[20px] py-[15px]">
@@ -73,11 +77,11 @@ function ScholarCard({
                     <div className="absolute right-[15px] mt-[-2px] ">
                         <StarRating ratingPercentage={stars + "%"} /></div>
                         <h1 onClick={onClick}
-                            className="cursor-pointer absolute font-light font-body text-primary-dark/50 text-sm right-[17px] bottom-[20px]">
+                            className="cursor-pointer absolute font-light font-body text-primary text-sm right-[17px] bottom-[20px]">
                             Click to read more
                     </h1>
                 </div>
-
+                
                 {/* Pin Image */}
                 <img
                     onClick={(e)=>{
@@ -93,17 +97,17 @@ function ScholarCard({
             {/* Status */}
             {
                 status === 'new' &&
-                <h1 className="w-[75px] h-[40px] text-xl font-display text-background-50 font-bold bg-alert-800/80 absolute right-0 top-0 rounded flex items-center justify-center">
+                <h1 className="w-[75px] h-[40px] text-xl font-display text-background-50 font-bold bg-alert-800/80 absolute right-0 top-[15px] rounded-xl flex items-center justify-center">
                     NEW
                 </h1>
             }
             {
                 status === 'trending' &&
                 <img
-                        className="absolute top-[-35px] right-[-35px]" src={window.document.URL + "/images/icons/Trending.svg"}
+                        className="absolute top-[-35px] right-[-35px] z-10" src={window.location.origin + "/images/icons/Trending.svg"}
                         alt=""
                     />
-            }
+            } 
         </div>
     )
 }

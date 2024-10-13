@@ -4,17 +4,19 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom"
 
 // import App from './App.tsx'
 import "@/index.css";
-import Homepage from '@pages/Homepage';
-import NotFoundPage from '@pages/NotFoundPage';
+
 import "@/App.css"
 import InputTemplate from './components/InputTemplate';
 
-import LandingPage from '@pages/LandingPage';
+import Homepage from '@pages/Homepage';
+import NotFoundPage from '@pages/NotFoundPage';
+import App from './App.tsx';
+import LandingPage from './pages/LandingPage.tsx';
 
 const router = createBrowserRouter([
     {
         path: "/",
-        element: <LandingPage />,
+        element: <Homepage />,
         errorElement: <NotFoundPage />,
     },
 ])
