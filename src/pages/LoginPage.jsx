@@ -24,8 +24,7 @@ const LoginPage = () => {
         const userCredential = await loginEmailPass(email, password);
         const data = await getData("users", userCredential.user.uid)
         
-        setUserId(userCredential.user.uid); // Update context
-        localStorage.setItem('userId', JSON.stringify(userCredential.user.uid)); // Persist in localStorage
+        setUserId(userCredential.user.uid);
 
         if(data.role === "user"){
           navigate("/dashboard")

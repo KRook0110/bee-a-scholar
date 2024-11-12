@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
 import { useUser } from '../config/useContext';
+import { addToDBNoID } from '../config/firebase';
 
 const AdminForm = () => {
   const { userId } = useUser();
@@ -66,8 +67,7 @@ const AdminForm = () => {
       !benefitArray.length || // Check if there are any benefits
       !tagArray.length || // Check if there are any tags
       !startDate ||
-      !endDate ||
-      !image
+      !endDate
     ) {
       setError("Please fill out all fields before submitting.");
       scrollToTop();
@@ -80,15 +80,18 @@ const AdminForm = () => {
       return;
     }
 
-    if (!userId) {
-      setError("User ID is not available.");
-      scrollToTop();
-      return;
-    }
+    const dataDict = {
+      title,
+      description,
+      requirementArray,
+      benefitArray,
+      tagArray,
+      startDate,
+      endDate,
+      userId
+    };
 
-    setError("");
-
-
+    await addToDBNoID("scholarships", dataDict);
   };
 
   return (

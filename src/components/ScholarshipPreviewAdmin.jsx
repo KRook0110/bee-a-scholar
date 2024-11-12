@@ -1,13 +1,13 @@
 import React from 'react'
 
-const ScholarshipPreviewAdmin = ({name = "Title", deadline = "31 January 2024", participant = 300}) => {
+const ScholarshipPreviewAdmin = ({title = "Title", deadline = "31 January 2024", participant = 300}) => {
   return (
     <div className='flex gap-10 items-center px-8 py-4 rounded-xl shadow-lg w-[49%]'>
       <div>
         <img src="" alt="tes" />
       </div>
       <div className=''>
-        <h1 className='font-semibold text-xl'>{name}</h1>
+        <h1 className='font-semibold text-xl'>{title}</h1>
         <p className='text-gray-500'><span className='font-semibold'>Deadline:</span> {deadline}</p>
       </div>
       <div>

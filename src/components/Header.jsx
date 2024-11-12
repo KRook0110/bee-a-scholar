@@ -1,7 +1,11 @@
 import React, { useState } from 'react'
 import { link } from '../config/data'
+import { handleLogout } from '../config/firebase'
+import { useUser } from '../config/useContext';
 
 const Header = ({login}) => {
+  const { setUserId } = useUser();
+
   const[hide, setHide] = useState(true)
 
   return (
@@ -109,6 +113,14 @@ const Header = ({login}) => {
             <div className='w-6'><img src="icons/phone.png" alt="" /></div>
             <p>Contact Us</p>
           </a>
+
+          <button onClick={() => {
+            handleLogout()
+            setUserId(false)
+          }} className='flex gap-3 items-center'>
+            <div className='w-6'><img src="icons/logout.png" alt="" /></div>
+            <p>Log Out</p>
+          </button>
         </div>
 
       </div>

@@ -16,9 +16,7 @@ export const UserProvider = ({ children }) => {
 
   // Update localStorage whenever userId changes
   useEffect(() => {
-    if (userId !== false) {
-      localStorage.setItem('userId', JSON.stringify(userId));
-    }
+    localStorage.setItem('userId', JSON.stringify(userId));
   }, [userId]);
 
   return (
