@@ -3,14 +3,17 @@ import Header from '../components/Header'
 import Footer from '../components/Footer'
 import SearchBar from '../components/SearchBar'
 import ScholarshipPreview from '../components/ScholarshipPreview'
+import { useUser } from '../config/useContext'
 
 const MainPage = () => {
+  const { userId } = useUser();
+
   const [filter, setFilter] = useState("All");
   const [searchQuery, setSearchQuery] = useState("");
 
   return (
     <div className='poppins'>
-      <Header />
+      <Header login={userId}/>
 
       <div className='bg-[#EEF7FF]'>
         <section className="mb-10 pb-10 pt-24">

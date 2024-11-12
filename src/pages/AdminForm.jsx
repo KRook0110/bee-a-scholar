@@ -1,27 +1,24 @@
 import React, { useState } from 'react'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
-import { useLocation } from 'react-router-dom';
+import { useUser } from '../config/useContext';
 
 const AdminForm = () => {
-  const location = useLocation();
-  const { userId } = location.state || {};
+  const { userId } = useUser();
 
   const [error, setError] = useState("");
+  const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [details, setDetails] = useState("");
   const [image, setImage] = useState(null);
-  const [action, setAction] = useState("");
-  const [goal, setGoal] = useState("");
+  const [requirement, setRequirement] = useState("");
+  const [benefit, setBenefit] = useState("");
   const [tags, setTags] = useState("");
-  const [actionArray, setActionArray] = useState([]);
-  const [goalArray, setGoalArray] = useState([]);
+  const [requirementArray, setRequirementArray] = useState([]);
+  const [benefitArray, setBenefitArray] = useState([]);
   const [tagArray, setTagArray] = useState([]);
-  const [type, setType] = useState("Donation");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [termsAgreed, setTermsAgreed] = useState(false);
-  const [targetDonation, setTargetDonation] = useState(0);
   const [imgUrl, setImgUrl] = useState("");
 
   const scrollToTop = () => {
@@ -42,7 +39,7 @@ const AdminForm = () => {
   const handleArrayInput = (setter, arraySetter) => (e) => {
     const value = e.target.value;
 
-    if (value.endsWith(",")) {
+    if (value.endsWith("|")) {
       // If the input ends with a comma, update the array and reset the input
       const newValue = value.slice(0, -1).trim(); // Remove the comma
       if (newValue) {
@@ -63,15 +60,14 @@ const AdminForm = () => {
 
     // Validation checks
     if (
+      !title ||
       !description ||
-      !details ||
-      !actionArray.length || // Check if there are any actions
-      !goalArray.length || // Check if there are any goals
+      !requirementArray.length || // Check if there are any requirements
+      !benefitArray.length || // Check if there are any benefits
       !tagArray.length || // Check if there are any tags
       !startDate ||
       !endDate ||
-      !image ||
-      (type === "Donation" && targetDonation === 0)
+      !image
     ) {
       setError("Please fill out all fields before submitting.");
       scrollToTop();
@@ -90,14 +86,14 @@ const AdminForm = () => {
       return;
     }
 
-    setError(""); // Clear error message on successful validation
+    setError("");
 
-    
+
   };
 
   return (
     <div className='poppins'>
-      <Header />
+      <Header login={userId}/>
 
       <div className="bg-white raleway min-h-screen">
         <form
@@ -110,30 +106,30 @@ const AdminForm = () => {
               htmlFor="describe"
               className="block text-gray-700 font-semibold mb-2"
             >
-              Describe
+              Title
             </label>
             <input
               type="text"
               id="describe"
               className="w-full border rounded-lg p-2 h-12"
-              value={description}
-              onChange={handleInputChange(setDescription)}
-              placeholder="Give a short description"
+              value={title}
+              onChange={handleInputChange(setTitle)}
+              placeholder="Give a short title"
             />
           </div>
 
           <div className="mb-4">
             <label
-              htmlFor="description"
+              htmlFor="title"
               className="block text-gray-700 font-semibold mb-2"
             >
-              Details
+              Description
             </label>
             <textarea
-              id="description"
+              id="title"
               className="w-full border rounded-lg p-2 h-40 resize-none"
-              value={details}
-              onChange={handleInputChange(setDetails)}
+              value={description}
+              onChange={handleInputChange(setDescription)}
               placeholder="Give a detailed description"
             ></textarea>
           </div>
@@ -155,10 +151,10 @@ const AdminForm = () => {
             )}
           </div>
 
-          {/* Actions Input */}
+          {/* requirements Input */}
           <div className="mb-4">
             <label
-              htmlFor="action"
+              htmlFor="requirement"
               className="block text-gray-700 font-semibold mb-2"
             >
               What are the requirements?
@@ -166,12 +162,12 @@ const AdminForm = () => {
             <input
               type="text"
               className="w-full border rounded-lg p-2 h-12 mb-2"
-              value={action}
-              onChange={handleArrayInput(setAction, setActionArray)}
+              value={requirement}
+              onChange={handleArrayInput(setRequirement, setRequirementArray)}
               placeholder="Help clean the..."
             />
             <div className="flex flex-wrap">
-              {actionArray.map((act, index) => (
+              {requirementArray.map((act, index) => (
                 <span
                   key={index}
                   className="bg-blue-200 text-blue-800 px-2 py-1 rounded-full mr-2 mb-2 flex items-center"
@@ -179,7 +175,7 @@ const AdminForm = () => {
                   {act}
                   <button
                     type="button"
-                    onClick={() => handleDelete(setActionArray)(index)}
+                    onClick={() => handleDelete(setRequirementArray)(index)}
                     className="ml-2 text-red-500"
                   >
                     &times; {/* X icon for delete */}
@@ -189,20 +185,20 @@ const AdminForm = () => {
             </div>
           </div>
 
-          {/* Goals Input */}
+          {/* benefits Input */}
           <div className="mb-4">
-            <label htmlFor="goal" className="block text-gray-700 font-semibold mb-2">
+            <label htmlFor="benefit" className="block text-gray-700 font-semibold mb-2">
               List out the benefits!
             </label>
             <input
               type="text"
               className="w-full border rounded-lg p-2 h-12 mb-2"
-              value={goal}
-              onChange={handleArrayInput(setGoal, setGoalArray)}
+              value={benefit}
+              onChange={handleArrayInput(setBenefit, setBenefitArray)}
               placeholder="Lower flood chances..."
             />
             <div className="flex flex-wrap">
-              {goalArray.map((g, index) => (
+              {benefitArray.map((g, index) => (
                 <span
                   key={index}
                   className="bg-green-200 text-green-800 px-2 py-1 rounded-full mr-2 mb-2 flex items-center"
@@ -210,7 +206,7 @@ const AdminForm = () => {
                   {g}
                   <button
                     type="button"
-                    onClick={() => handleDelete(setGoalArray)(index)}
+                    onClick={() => handleDelete(setBenefitArray)(index)}
                     className="ml-2 text-red-500"
                   >
                     &times; {/* X icon for delete */}

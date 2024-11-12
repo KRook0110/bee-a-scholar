@@ -63,7 +63,7 @@ const Reviews = () => {
       temp.push(React.createElement("button",{
         key: i, onClick:() => {
           manageButton(404, i)
-        }, className: `${i == idx ? 'w-10 h-3 bg-yellow' : 'w-3 h-3 bg-white'} rounded-full transition-all ease-in-out`})
+        }, className: `${i == idx ? 'w-10 h-3 bg-[#FFBD5A]' : 'w-3 h-3 bg-white'} rounded-full transition-all ease-in-out`})
       )
     }
 

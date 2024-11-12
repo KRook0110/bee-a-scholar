@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { link } from '../config/data'
 
-const Header = ({login = false}) => {
+const Header = ({login}) => {
   const[hide, setHide] = useState(true)
 
   return (

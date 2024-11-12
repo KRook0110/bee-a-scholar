@@ -2,8 +2,13 @@ import React, { useState } from 'react'
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import { getData, loginEmailPass } from '../config/firebase';
+import { useNavigate } from 'react-router-dom';
+import { useUser } from '../config/useContext';
 
 const LoginPage = () => {
+  const { userId, setUserId } = useUser();
+
+  const navigate = useNavigate();
 
   const [email, setEmail] = useState(""); 
   const [password, setPassword] = useState(""); 
@@ -18,18 +23,28 @@ const LoginPage = () => {
     try {
         const userCredential = await loginEmailPass(email, password);
         const data = await getData("users", userCredential.user.uid)
-        console.log(data)
+        
+        setUserId(userCredential.user.uid); // Update context
+        localStorage.setItem('userId', JSON.stringify(userCredential.user.uid)); // Persist in localStorage
+
+        if(data.role === "user"){
+          navigate("/dashboard")
+        }
+        else{
+          navigate("/admin-dashboard")
+        }
+
     } catch (error) {
         setError("Login failed: " + error.message);
         console.log("Login error:", error.message);
     } finally {
         setLoading(false);
     }
-};
+  };
 
   return (
     <div className="poppins flex flex-col min-h-screen w-full">
-          <Header />
+          <Header login={userId}/>
 
           <div className="flex items-center justify-center bg-gradient-to-b from-[#1C429A] to-[#3089D6]">
             <div className="flex flex-col md:flex-row items-center justify-center h-screen w-full">

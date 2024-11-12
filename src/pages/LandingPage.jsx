@@ -1,14 +1,17 @@
 import Footer from "../components/Footer"
 import Header from "../components/Header"
-import Reviews from "../components/Header"
+import Reviews from "../components/Reviews"
 import { link } from "../config/data"
+import { useUser } from "../config/useContext"
 
 
 const LandingPage = () => {
+  const { userId } = useUser();
   
   return (
     <div className="poppins">
-      <Header />
+      
+      <Header login={userId}/>
 
       <div>
 
@@ -160,7 +163,7 @@ const LandingPage = () => {
 
       <section style={{
         backgroundImage: `url(${"./images/review.png"})`
-      }} className='raleway py-20'>
+      }} className='py-20'>
 
         {/* Carousel Headline */}
         <div className='px-[10%]'>

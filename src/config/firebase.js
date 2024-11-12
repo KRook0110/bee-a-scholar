@@ -32,7 +32,18 @@ export const addToDB = async (databaseName, id, dataDict) => {
 }
 
 export const getData = async (databaseName, id) => {
-  const docRef = doc(db, databaseName, id);
-  const temp = await getDoc(docRef);
-  return temp; 
-}
+  try {
+    const docRef = doc(db, databaseName, id);
+    const temp = await getDoc(docRef);
+
+    if (temp.exists()) {
+      return temp.data(); // Extracts the document data if it exists
+    } else {
+      console.log("No such document!");
+      return null; // Return null if the document does not exist
+    }
+  } catch (error) {
+    console.error("Error getting document:", error);
+    return null; // Handle errors gracefully
+  }
+};

@@ -1,28 +1,56 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
 import ScholarshipPreviewAdmin from '../components/ScholarshipPreviewAdmin'
+import { getData } from '../config/firebase'
+import { useUser } from '../config/useContext'
 
 const AdminDashboard = () => {
-  
-  const name = "tes"
+  const { userId } = useUser();
+
+  const [userData, setUserData] = useState(null); // Initialize with null to handle loading state
+  const [loading, setLoading] = useState(true); // Track loading state
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const data = await getData("users", userId);
+        setUserData(data); // Update state with fetched data
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      } finally {
+        setLoading(false); // Stop loading when data is fetched
+      }
+    };
+
+    if (userId) {
+      fetchUserData(); // Fetch data if userId is available
+    }
+  }, [userId]); // Dependency on userId
+
+  if (loading) {
+    return <div>Loading...</div>; // Show a loading message while data is being fetched
+  }
+
+  if (!userData) {
+    return <div>Error: No user data found.</div>; // Handle case where no data is returned
+  }
 
   return (
     <div className='poppins'>
-      <Header />
+      <Header login={userId}/>
 
       <main className='min-h-screen'>
-
         <div className='px-20 py-10 flex justify-between items-center'>
           <div className='flex items-center gap-3'>
-            <h1 className='font-semibold text-3xl'>Welcome, {name}</h1>
-            <div className='w-10'><img src="icons/hand.png" alt="" /></div>
+            <h1 className='font-semibold text-3xl'>Welcome, {userData.name}</h1>
+            <div className='w-10'><img src="icons/hand.png" alt=""/></div>
           </div>
 
           <div className='flex gap-5 items-center'>
-            <input type="text" placeholder='Search'className='border-2 w-[500px] rounded-full px-4 py-2 text-lg'/>
+            <input type="text" placeholder='Search' className='border-2 w-[500px] rounded-full px-4 py-2 text-lg' />
 
-            <a href="" className='font-semibold text-lg flex gap-3 items-center bg-[#1C429A] text-white px-4 py-2 rounded-full'>
+            <a href="/add-scholarship" className='font-semibold text-lg flex gap-3 items-center bg-[#1C429A] text-white px-4 py-2 rounded-full'>
               <div className='w-4 rotate-180'><img src="icons/plus.png" alt=""/></div>
               <p>Add new scholarship</p>
             </a>
@@ -40,7 +68,7 @@ const AdminDashboard = () => {
 
       <Footer />
     </div>
-  )
+  );
 }
 
-export default AdminDashboard
+export default AdminDashboard;

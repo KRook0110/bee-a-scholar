@@ -3,8 +3,10 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { link } from '../config/data';
 import { addToDB, createNewUser } from '../config/firebase';
+import { useUser } from '../config/useContext';
 
 const RegisterPage = () => {
+  const { userId, setUserId } = useUser();
 
   const [error, setError] = useState(null);
   const [firstName, setFirstName] = useState("");
@@ -53,6 +55,7 @@ const RegisterPage = () => {
       };
 
       await addToDB("users", authCredential.user.uid, userData)
+      setUserId(authCredential.user.uid);
     }
     catch (err){
       setError(err)
@@ -63,7 +66,7 @@ const RegisterPage = () => {
     <div className="poppins">
 
       {/* Content */}
-      <Header />
+      <Header login={userId}/>
 
       <div className="flex items-center justify-center bg-gradient-to-b from-[#1C429A] to-[#3089D6]">
         <div className="flex flex-col md:flex-row items-center justify-center h-screen">
