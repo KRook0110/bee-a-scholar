@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword, signOut } from 'firebase/auth'
-import { addDoc, collection, doc, getDoc, getDocs, getFirestore, query, setDoc, where } from 'firebase/firestore'
+import { addDoc, collection, doc, getDoc, getDocs, getFirestore, query, setDoc, updateDoc, where } from 'firebase/firestore'
 import { getStorage } from "firebase/storage";
 
 const firebaseConfig = {
@@ -13,10 +13,10 @@ const firebaseConfig = {
   measurementId: "G-MC9V4N54TJ"
 };
 
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app)
-const db = getFirestore(app)
-const storage = getStorage(app);
+export const app = initializeApp(firebaseConfig);
+export const auth = getAuth(app)
+export const db = getFirestore(app)
+export const storage = getStorage(app);
 
 export const loginEmailPass = (email, password) => {
   return signInWithEmailAndPassword(auth, email, password);
@@ -42,6 +42,8 @@ export const addToDBNoID = async (databaseName, dataDict) => {
 
 export const getData = async (databaseName, id) => {
   try {
+    console.log(databaseName, id)
+
     const docRef = doc(db, databaseName, id);
     const temp = await getDoc(docRef);
 
@@ -113,5 +115,15 @@ export const handleLogout = async () => {
     window.location.href = '/'; // Redirect to home page or login page after logout
   } catch (error) {
     console.error("Error signing out:", error);
+  }
+};
+
+export const updateInDB = async (collectionName, documentId, data) => {
+  try {
+    const docRef = doc(db, collectionName, documentId); // Reference to the document to update
+    await updateDoc(docRef, data); // Update the document with the new data
+    console.log("Document updated successfully");
+  } catch (error) {
+    console.error("Error updating document: ", error);
   }
 };

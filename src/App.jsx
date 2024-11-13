@@ -8,6 +8,7 @@ import MainPage from './pages/MainPage';
 import AdminForm from './pages/AdminForm';
 import ScholarshipDetail from './pages/ScholarshipDetail';
 import { UserProvider } from './config/useContext';
+import PinnedScholarship from './pages/PinnedScholarship';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route path="/add-scholarship" element={<AdminForm />} />
           <Route path="/dashboard" element={<MainPage />} />
           <Route path="/detail" element={<ScholarshipDetail />} />
+          <Route path="/pinned-scholarships" element={<PinnedScholarship />} />
         </Routes>
       </BrowserRouter>
     </UserProvider>

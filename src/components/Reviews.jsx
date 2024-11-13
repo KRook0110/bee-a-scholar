@@ -42,7 +42,6 @@ const Reviews = () => {
     }
   }
 
-  /* ----------------------------- Review Buttons ----------------------------- */
   const[buttonList, setButtonList] = useState([])
 
   const manageButton = (x, curr) => {
@@ -62,7 +61,7 @@ const Reviews = () => {
     for(let i = 0; i < reviewList.length; i++){
       temp.push(React.createElement("button",{
         key: i, onClick:() => {
-          manageButton(404, i)
+          manageButton(305, i)
         }, className: `${i == idx ? 'w-10 h-3 bg-[#FFBD5A]' : 'w-3 h-3 bg-white'} rounded-full transition-all ease-in-out`})
       )
     }
@@ -71,7 +70,6 @@ const Reviews = () => {
   }, [idx])
 
 
-  /* ------------------------------ Main Content ------------------------------ */
   return (
     <div className='raleway flex flex-col gap-5'>
       <div className='flex justify-center items-center gap-5 py-5'>
@@ -80,7 +78,7 @@ const Reviews = () => {
             manageReview(idx - 1)
             scrollLeft(305)
           }}>
-            <img className='w-8 invert' src="/assets/Icons/Arrow_Reverse.png" alt=""/>
+            <img className='w-8 invert' src="icons/Arrow_Reverse.png" alt=""/>
           </button>
         </div>
 
@@ -93,7 +91,7 @@ const Reviews = () => {
             manageReview(idx + 1)
             scrollRight(305)
           }}>
-            <img className='w-8 invert' src="/assets/Icons/Arrow.png" alt=""/>
+            <img className='w-8 invert' src="icons/Arrow.png" alt=""/>
           </button>
         </div>
       </div>

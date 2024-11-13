@@ -4,9 +4,12 @@ import Footer from '../components/Footer';
 import { link } from '../config/data';
 import { addToDB, createNewUser } from '../config/firebase';
 import { useUser } from '../config/useContext';
+import { useNavigate } from 'react-router-dom';
 
 const RegisterPage = () => {
   const { userId, setUserId } = useUser();
+
+  const navigate = useNavigate();
 
   const [error, setError] = useState(null);
   const [firstName, setFirstName] = useState("");
@@ -56,6 +59,7 @@ const RegisterPage = () => {
 
       await addToDB("users", authCredential.user.uid, userData)
       setUserId(authCredential.user.uid);
+      navigate("/dashboard")
     }
     catch (err){
       setError(err)

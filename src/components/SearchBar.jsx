@@ -8,54 +8,54 @@ const SearchBar = ({ filter, setFilter, searchQuery, setSearchQuery }) => {
         style={{ backgroundColor: "#D9D9D9", borderRadius: "35px" }}
       >
         <button
-          onClick={() => setFilter("All")}
+          onClick={() => setFilter("all")}
           className={`font-semibold py-2 px-2 rounded-full w-full ${
-            filter === "All" ? "bg-[#1C429A] text-white" : "bg-none"
+            filter === "all" ? "bg-[#1C429A] text-white" : "bg-none"
           }`}
         >
           All
         </button>
         <button
-          onClick={() => setFilter("Academic")}
+          onClick={() => setFilter("academic")}
           className={`font-semibold py-2 px-2 rounded-full w-full relative ${
-            filter === "Academic" ? "bg-[#1C429A] text-white" : "bg-none"
+            filter === "academic" ? "bg-[#1C429A] text-white" : "bg-none"
           }`}
         >
           <img className={`absolute w-20 bottom-10 left-[40%] ${
-            filter === "Academic" ? "" : "opacity-50"
+            filter === "academic" ? "" : "opacity-50"
           } transition-all ease-in-out`} src="logos/academic_scholarship.png" alt="" />
           Academic
         </button>
         <button
-          onClick={() => setFilter("Non-Academic")}
+          onClick={() => setFilter("nonAcademic")}
           className={`font-semibold py-2 px-2 rounded-full w-full relative ${
-            filter === "Non-Academic" ? "bg-[#1C429A] text-white" : "bg-none"
+            filter === "nonAcademic" ? "bg-[#1C429A] text-white" : "bg-none"
           }`}
         >
           <img className={`absolute w-20 bottom-10 left-[40%] ${
-            filter === "Non-Academic" ? "" : "opacity-50"
+            filter === "nonAcademic" ? "" : "opacity-50"
           } transition-all ease-in-out`} src="logos/non_academic_scholarship.png" alt="" />
           Non-Academic
         </button>
         <button
-          onClick={() => setFilter("Research")}
+          onClick={() => setFilter("research")}
           className={`font-semibold flex items-center justify-center py-2 px-2 rounded-full w-full relative ${
-            filter === "Research" ? "bg-[#1C429A] text-white" : "bg-none"
+            filter === "research" ? "bg-[#1C429A] text-white" : "bg-none"
           }`}
         >
           <img className={`absolute w-20 bottom-10 left-[40%] ${
-            filter === "Research" ? "" : "opacity-50"
+            filter === "research" ? "" : "opacity-50"
           } transition-all ease-in-out`} src="logos/research_scholarship.png" alt="" />
           Research
         </button>
         <button
-          onClick={() => setFilter("Career")}
+          onClick={() => setFilter("career")}
           className={`font-semibold flex items-center justify-center py-2 px-2 rounded-full w-full relative ${
-            filter === "Career" ? "bg-[#1C429A] text-white" : "bg-none"
+            filter === "career" ? "bg-[#1C429A] text-white" : "bg-none"
           }`}
         >
           <img className={`absolute w-20 bottom-10 left-[40%] ${
-            filter === "Career" ? "" : "opacity-50"
+            filter === "career" ? "" : "opacity-50"
           } transition-all ease-in-out`} src="logos/career_scholarship.png" alt="" />
           Career
         </button>
@@ -75,9 +75,9 @@ const SearchBar = ({ filter, setFilter, searchQuery, setSearchQuery }) => {
           </button>
         </div>
 
-        <button className="bg-yellow w-1/4 py-2 px-4 rounded-full font-semibold text-xs sm:text-base">
+        {/* <button className="bg-yellow w-1/4 py-2 px-4 rounded-full font-semibold text-xs sm:text-base">
           Filter ⏷
-        </button>
+        </button> */}
       </div>
     </div>
   );

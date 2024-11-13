@@ -1,7 +1,7 @@
 import Footer from "../components/Footer"
 import Header from "../components/Header"
 import Reviews from "../components/Reviews"
-import { link } from "../config/data"
+import { link, partners } from "../config/data"
 import { useUser } from "../config/useContext"
 
 
@@ -126,12 +126,13 @@ const LandingPage = () => {
       {/* Partners */}
       <section className="flex flex-col-reverse md:flex-row columns-2 items-center justify-center pt-10 pb-20 raleway px-[5%] gap-10">
         <div className='flex flex-wrap w-full md:w-3/4 justify-center items-center px-[10%] gap-10'>
-          <img className='size-20 lg:size-28 bg-gray-500 rounded-full' src="" alt="" />
-          <img className='size-20 lg:size-28 bg-gray-500 rounded-full' src="" alt="" />
-          <img className='size-20 lg:size-28 bg-gray-500 rounded-full' src="" alt="" />
-          <img className='size-20 lg:size-28 bg-gray-500 rounded-full' src="" alt="" />
-          <img className='size-20 lg:size-28 bg-gray-500 rounded-full' src="" alt="" />
-          <img className='size-20 lg:size-28 bg-gray-500 rounded-full' src="" alt="" />
+          {
+            partners.map((partner) => (
+              <div className="size-20 lg:size-28 bg-white rounded-full flex justify-center items-center">
+                <img className='object-contain' src={`partners/${partner}`} alt="" />
+              </div>
+            ))
+          }
         </div>
 
         <div className="flex flex-col w-full space-y-8">
@@ -144,7 +145,7 @@ const LandingPage = () => {
               These partnerships ensure that every scholarship listed is not only credible but also designed to help you succeed.<br/><br/>
               <span className="font-semibold">Together, we're opening doors to brighter futures.</span>
             </p>
-            <a href="" className="flex flex-row items-center font-display font-bold text-[#63B8F6]">See all partners
+            {/* <a href="" className="flex flex-row items-center font-display font-bold text-[#63B8F6]">See all partners
               <span className="px-2">
                 <svg xmlns="http://www.w3.org/2000/svg" width="9" height="16" fill="none" viewBox="0 0 9 16">
                     <g clip-path="url(#a)">
@@ -157,7 +158,7 @@ const LandingPage = () => {
                     </defs>
                 </svg>
               </span>
-            </a>
+            </a> */}
         </div>
       </section>
 

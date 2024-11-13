@@ -1,10 +1,13 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
 import { useUser } from '../config/useContext';
-import { addToDBNoID } from '../config/firebase';
+import { addToDBNoID, getData, updateInDB } from '../config/firebase';
+import { useLocation } from 'react-router-dom';
 
 const AdminForm = () => {
+  const location = useLocation();
+  const scholarshipId = location.state?.scholarShipId ?? null;
   const { userId } = useUser();
 
   const [error, setError] = useState("");
@@ -21,6 +24,25 @@ const AdminForm = () => {
   const [endDate, setEndDate] = useState("");
   const [termsAgreed, setTermsAgreed] = useState(false);
   const [imgUrl, setImgUrl] = useState("");
+
+  // Fetch existing scholarship data if scholarshipId is available
+  useEffect(() => {
+    if (scholarshipId) {
+      const fetchData = async () => {
+        const scholarshipData = await getData("scholarships", scholarshipId);
+        if (scholarshipData) {
+          setTitle(scholarshipData.title || "");
+          setDescription(scholarshipData.description || "");
+          setRequirementArray(scholarshipData.requirementArray || []);
+          setBenefitArray(scholarshipData.benefitArray || []);
+          setTagArray(scholarshipData.tagArray || []);
+          setStartDate(scholarshipData.startDate || "");
+          setEndDate(scholarshipData.endDate || "");
+        }
+      };
+      fetchData();
+    }
+  }, [scholarshipId]);
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -41,14 +63,13 @@ const AdminForm = () => {
     const value = e.target.value;
 
     if (value.endsWith("|")) {
-      // If the input ends with a comma, update the array and reset the input
-      const newValue = value.slice(0, -1).trim(); // Remove the comma
+      const newValue = value.slice(0, -1).trim();
       if (newValue) {
-        arraySetter((prev) => [...prev, newValue]); // Add new value to array
+        arraySetter((prev) => [...prev, newValue]);
       }
-      setter(""); // Clear input field
+      setter("");
     } else {
-      setter(value); // Update the input field
+      setter(value);
     }
   };
 
@@ -58,14 +79,13 @@ const AdminForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    // Validation checks
+  
     if (
       !title ||
       !description ||
-      !requirementArray.length || // Check if there are any requirements
-      !benefitArray.length || // Check if there are any benefits
-      !tagArray.length || // Check if there are any tags
+      !requirementArray.length ||
+      !benefitArray.length ||
+      !tagArray.length ||
       !startDate ||
       !endDate
     ) {
@@ -73,13 +93,13 @@ const AdminForm = () => {
       scrollToTop();
       return;
     }
-
+  
     if (!termsAgreed) {
       setError("You must agree to the Terms and Conditions.");
       scrollToTop();
       return;
     }
-
+  
     const dataDict = {
       title,
       description,
@@ -88,11 +108,39 @@ const AdminForm = () => {
       tagArray,
       startDate,
       endDate,
-      userId
+      userId,
+      imgUrl, // Include imgUrl if available
     };
-
-    await addToDBNoID("scholarships", dataDict);
+  
+    try {
+      if (scholarshipId) {
+        // If scholarshipId is present, update the existing document
+        await updateInDB("scholarships", scholarshipId, dataDict);
+      } else {
+        // If no scholarshipId, add a new document
+        await addToDBNoID("scholarships", dataDict);
+      }
+  
+      // After successful submission, clear the form
+      setTitle("");
+      setDescription("");
+      setRequirementArray([]);
+      setBenefitArray([]);
+      setTagArray([]);
+      setStartDate("");
+      setEndDate("");
+      setImgUrl("");
+      setTermsAgreed(false);
+  
+      // Show success message
+      setError("Scholarship successfully submitted!");
+      scrollToTop();
+    } catch (error) {
+      setError("Error occurred while submitting the scholarship.");
+      scrollToTop();
+    }
   };
+  
 
   return (
     <div className='poppins'>

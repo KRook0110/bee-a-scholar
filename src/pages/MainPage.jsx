@@ -7,34 +7,41 @@ import { useUser } from '../config/useContext';
 import { getCollection } from '../config/firebase';
 
 const MainPage = () => {
-  const { userId } = useUser();
+  const { userId } = useUser();  // Get userId from context
 
-  const [filter, setFilter] = useState("All");
+  const [filter, setFilter] = useState("all"); // "all" could mean no filtering based on category
   const [searchQuery, setSearchQuery] = useState("");
-  const [scholarships, setScholarships] = useState([]); // Store the scholarships in state
-  const [loading, setLoading] = useState(true); // Track loading state
+  const [scholarships, setScholarships] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   // Fetch scholarships when the component mounts
   useEffect(() => {
     const fetchScholarships = async () => {
       setLoading(true);
       const data = await getCollection("scholarships");
-      setScholarships(data); // Set the state with the fetched scholarships
-      setLoading(false); // Stop loading once data is fetched
+      setScholarships(data);
+      setLoading(false);
     };
 
-    fetchScholarships(); // Call the function to fetch scholarships
-  }, []); // Empty dependency array to run the effect only once when the component mounts
+    fetchScholarships();
+  }, []);
 
   if (loading) {
-    return <div>Loading...</div>; // Show loading message while fetching data
+    return <div>Loading...</div>;
   }
+
+  // Filter scholarships based on category and title match
+  const filteredScholarships = scholarships.filter((s) => {
+    const matchesFilter = filter === "all" || s.category?.includes(filter);
+    const matchesSearchQuery = s.title?.toLowerCase().includes(searchQuery.toLowerCase());
+    return matchesFilter && matchesSearchQuery;
+  });
 
   return (
     <div className='poppins'>
-      <Header login={userId}/>
+      <Header login={userId} />  {/* Ensure userId is passed to Header */}
 
-      <div className='bg-[#EEF7FF]'>
+      <div className='bg-[#EEF7FF] min-h-screen'>
         <section className="mb-10 pb-10 pt-24">
           <SearchBar
             filter={filter}
@@ -45,9 +52,18 @@ const MainPage = () => {
         </section>
 
         <section className='flex flex-wrap gap-5 px-20 pb-10'>
-          {/* Map over the fetched scholarships */}
-          {scholarships.map((s, idx) => (
-            <ScholarshipPreview key={idx} title={s.title} deadline={s.endDate}/>
+          {/* Map over the filtered scholarships */}
+          {filteredScholarships.map((s, idx) => (
+            <ScholarshipPreview
+              userId={userId}  // Pass userId to ScholarshipPreview
+              key={idx}
+              title={s.title}
+              deadline={s.endDate}
+              imgUrl={s.imgPath}
+              category={s.category}
+              tags={s.tagArray}
+              id={s.id}
+            />
           ))}
         </section>
       </div>

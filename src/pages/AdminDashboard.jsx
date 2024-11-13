@@ -8,50 +8,50 @@ import { useUser } from '../config/useContext';
 const AdminDashboard = () => {
   const { userId } = useUser();
 
-  const [userData, setUserData] = useState(null); // Initialize with null to handle loading state
-  const [loading, setLoading] = useState(true); // Track loading state
-  const [scholarships, setScholarships] = useState([]); // Store scholarships
+  const [userData, setUserData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [scholarships, setScholarships] = useState([]);
 
   // Fetch user data and scholarships
   useEffect(() => {
     const fetchUserData = async () => {
       try {
         const data = await getData('users', userId);
-        setUserData(data); // Update state with fetched user data
+        setUserData(data);
       } catch (error) {
         console.error('Error fetching user data:', error);
       } finally {
-        setLoading(false); // Stop loading when data is fetched
+        setLoading(false);
       }
     };
 
     if (userId) {
-      fetchUserData(); // Fetch user data if userId is available
+      fetchUserData();
     }
-  }, [userId]); // Dependency on userId
+  }, [userId]);
 
-  // Fetch scholarships related to the user
+  // Fetch scholarships related to the user, including document ID
   useEffect(() => {
     const fetchScholarships = async () => {
       if (userId) {
         try {
           const data = await queryCollectionByField('scholarships', 'userId', userId);
-          setScholarships(data); // Update state with fetched scholarships
+          setScholarships(data);
         } catch (error) {
           console.error('Error fetching scholarships:', error);
         }
       }
     };
 
-    fetchScholarships(); // Fetch scholarships on component mount or when userId changes
-  }, [userId]); // Dependency on userId
+    fetchScholarships();
+  }, [userId]);
 
   if (loading) {
-    return <div>Loading...</div>; // Show a loading message while data is being fetched
+    return <div>Loading...</div>;
   }
 
   if (!userData) {
-    return <div>Error: No user data found.</div>; // Handle case where no data is returned
+    return <div>Error: No user data found.</div>;
   }
 
   return (
@@ -90,11 +90,13 @@ const AdminDashboard = () => {
           {scholarships.length === 0 ? (
             <p>You haven't added any scholarship!</p>
           ) : (
-            scholarships.map((s, idx) => (
+            scholarships.map((s) => (
               <ScholarshipPreviewAdmin
-                key={idx}
+                key={s.id}
+                id={s.id} // Pass the document ID to ScholarshipPreviewAdmin
                 title={s.title}
                 deadline={s.endDate}
+                imgPath={s.imgPath}
               />
             ))
           )}
