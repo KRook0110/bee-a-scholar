@@ -8,9 +8,10 @@ import { useNavigate } from 'react-router-dom';
 
 const RegisterPage = () => {
   const { userId, setUserId } = useUser();
-
   const navigate = useNavigate();
 
+
+  /* -------------------------------- Form data ------------------------------- */
   const [error, setError] = useState(null);
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -23,6 +24,8 @@ const RegisterPage = () => {
   const nameRegex = /^[a-zA-Z\s]+$/
   const passRegex = /^[a-zA-Z0-9]{8,128}$/
 
+
+  /* -------------------------- Form submit function -------------------------- */
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -66,6 +69,8 @@ const RegisterPage = () => {
     }
   };
   
+
+  /* --------------------------------- Content -------------------------------- */
   return (
     <div className="poppins">
 

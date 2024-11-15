@@ -11,7 +11,8 @@ const PinnedScholarship = () => {
   const [scholarships, setScholarships] = useState([]);
   const [pinnedScholarships, setPinnedScholarships] = useState([]);
 
-  // Fetch scholarships when the component mounts
+
+  /* -------------- Fetch scholarships when the component mounts -------------- */
   useEffect(() => {
     const fetchScholarships = async () => {
       const data = await getCollection("scholarships");
@@ -35,9 +36,10 @@ const PinnedScholarship = () => {
     fetchUserPinnedScholarships();
   }, [userId]);
 
-  // Filter scholarships to only show the pinned ones
+  
+  /* ------------ Filter scholarships to only show the pinned ones ------------ */
   const filteredScholarships = scholarships.filter((s) =>
-    pinnedScholarships.includes(s.id) // Only show scholarships with matching IDs
+    pinnedScholarships.includes(s.id)
   );
 
   return (

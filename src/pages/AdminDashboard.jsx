@@ -7,12 +7,12 @@ import { useUser } from '../config/useContext';
 
 const AdminDashboard = () => {
   const { userId } = useUser();
-
   const [userData, setUserData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [scholarships, setScholarships] = useState([]);
 
-  // Fetch user data and scholarships
+
+  /* ----------------------------- Fetch user data ---------------------------- */
   useEffect(() => {
     const fetchUserData = async () => {
       try {
@@ -30,7 +30,8 @@ const AdminDashboard = () => {
     }
   }, [userId]);
 
-  // Fetch scholarships related to the user, including document ID
+
+  /* ------ Fetch scholarships whose "userId" column == userId ----- */
   useEffect(() => {
     const fetchScholarships = async () => {
       if (userId) {
@@ -46,6 +47,8 @@ const AdminDashboard = () => {
     fetchScholarships();
   }, [userId]);
 
+
+  /* ------------------------- Error / Loading Message ------------------------ */
   if (loading) {
     return <div>Loading...</div>;
   }
@@ -54,6 +57,8 @@ const AdminDashboard = () => {
     return <div>Error: No user data found.</div>;
   }
 
+
+  /* --------------------------------- Content -------------------------------- */
   return (
     <div className="poppins">
       <Header login={userId} />

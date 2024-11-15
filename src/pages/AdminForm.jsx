@@ -10,6 +10,7 @@ const AdminForm = () => {
   const scholarshipId = location.state?.scholarShipId ?? null;
   const { userId } = useUser();
 
+  /* ---------------------- States for form data & error ---------------------- */
   const [error, setError] = useState("");
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -25,7 +26,9 @@ const AdminForm = () => {
   const [termsAgreed, setTermsAgreed] = useState(false);
   const [imgUrl, setImgUrl] = useState("");
 
-  // Fetch existing scholarship data if scholarshipId is available
+  
+  // If location.state includes scholarshipId meaning that this form use for editing
+  // an existing scholarship, fetch the current data.
   useEffect(() => {
     if (scholarshipId) {
       const fetchData = async () => {
@@ -44,6 +47,8 @@ const AdminForm = () => {
     }
   }, [scholarshipId]);
 
+
+  /* --------------------------- Functions for form --------------------------- */
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
@@ -142,6 +147,7 @@ const AdminForm = () => {
   };
   
 
+  /* --------------------------------- Content -------------------------------- */
   return (
     <div className='poppins'>
       <Header login={userId}/>

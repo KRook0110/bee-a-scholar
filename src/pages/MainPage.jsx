@@ -7,14 +7,17 @@ import { useUser } from '../config/useContext';
 import { getCollection } from '../config/firebase';
 
 const MainPage = () => {
-  const { userId } = useUser();  // Get userId from context
+  const { userId } = useUser();7
 
-  const [filter, setFilter] = useState("all"); // "all" could mean no filtering based on category
+
+  /* ------------------------- States for search query ------------------------ */
+  const [filter, setFilter] = useState("all");
   const [searchQuery, setSearchQuery] = useState("");
   const [scholarships, setScholarships] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // Fetch scholarships when the component mounts
+
+  /* -------------- Fetch scholarships when the component mounts -------------- */
   useEffect(() => {
     const fetchScholarships = async () => {
       setLoading(true);
@@ -30,7 +33,8 @@ const MainPage = () => {
     return <div>Loading...</div>;
   }
 
-  // Filter scholarships based on category and title match
+
+  /* ---------- Filter scholarships based on category and title match --------- */
   const filteredScholarships = scholarships.filter((s) => {
     const matchesFilter = filter === "all" || s.category?.includes(filter);
     const matchesSearchQuery = s.title?.toLowerCase().includes(searchQuery.toLowerCase());
