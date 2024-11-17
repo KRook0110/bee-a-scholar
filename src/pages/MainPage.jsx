@@ -7,7 +7,7 @@ import { useUser } from '../config/useContext';
 import { getCollection } from '../config/firebase';
 
 const MainPage = () => {
-  const { userId } = useUser();7
+  const { userId } = useUser();
 
 
   /* ------------------------- States for search query ------------------------ */
