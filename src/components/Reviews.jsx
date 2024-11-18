@@ -1,95 +1,59 @@
 import React, { useEffect, useRef, useState } from 'react'
+import { reviews } from '../config/data'
 import ReviewInstance from './ReviewInstance'
 
 const Reviews = () => {
 
-  /* ------------------------------- For Scroll ------------------------------- */
-  const scrollRef = useRef(null)
-
-  const scrollLeft = (x) => {
-    if (scrollRef.current) {
-      scrollRef.current.scrollTo({
-        left: scrollRef.current.scrollLeft - x,
-        behavior: 'smooth'
-      });
-    }
-  }
-
-  const scrollRight = (x) => {
-    if (scrollRef.current) {
-      scrollRef.current.scrollTo({
-        left: scrollRef.current.scrollLeft + x,
-        behavior: 'smooth'
-      });
-    }
-  }
-
   /* ------------------------------- Review List ------------------------------ */
-  const[idx, setIdx] = useState(0)
-
-  const[reviewList, setReviewList] = useState([
-    <ReviewInstance />,
-    <ReviewInstance/>,
-    <ReviewInstance />,
-    <ReviewInstance />,
-    <ReviewInstance />,
-    <ReviewInstance />
-  ])
+  const[idx, setIdx] = useState(1)
 
   const manageReview = (newIdx) => {
-    if(newIdx < reviewList.length && newIdx >= 0){
+    if(newIdx < reviews.length && newIdx >= 0){
       setIdx(newIdx)
     }
   }
 
   const[buttonList, setButtonList] = useState([])
 
-  const manageButton = (x, curr) => {
-    setIdx(curr)
-
-    if (scrollRef.current) {
-      scrollRef.current.scrollTo({
-        left: curr * x,
-        behavior: 'smooth'
-      });
-    }
-  }
-
   useEffect(() => {
-    const temp = []
+    const temp_button = []
 
-    for(let i = 0; i < reviewList.length; i++){
-      temp.push(React.createElement("button",{
+    for(let i = 0; i < reviews.length; i++){
+      temp_button.push(React.createElement("button",{
         key: i, onClick:() => {
-          manageButton(305, i)
+          manageReview(i)
         }, className: `${i == idx ? 'w-10 h-3 bg-[#FFBD5A]' : 'w-3 h-3 bg-white'} rounded-full transition-all ease-in-out`})
       )
     }
 
-    setButtonList(temp)
+    setButtonList(temp_button)
+    
   }, [idx])
 
 
   return (
-    <div className='raleway flex flex-col gap-5'>
+    <div className='raleway flex flex-col gap-5 px-20'>
       <div className='flex justify-center items-center gap-5 py-5'>
         <div>
           <button onClick={() => {
             manageReview(idx - 1)
-            scrollLeft(305)
           }}>
             <img className='w-8 invert' src="icons/Arrow_Reverse.png" alt=""/>
           </button>
         </div>
 
-        <div ref={scrollRef} className='w-3/4 flex gap-3 overflow-hidden'>
-          {reviewList}
+        <div className='w-full flex gap-3 overflow-hidden justify-center'>
+          {
+            reviews.map((r, i) => (
+              i >= idx-1 && i <= idx+1 ?
+              <ReviewInstance name={r.name} desc={r.review} highlighted={idx === i ? true : false}/> : <></>
+            ))
+          }
         </div>
 
         <div>
           <button onClick={() => {
             manageReview(idx + 1)
-            scrollRight(305)
           }}>
             <img className='w-8 invert' src="icons/Arrow.png" alt=""/>
           </button>
