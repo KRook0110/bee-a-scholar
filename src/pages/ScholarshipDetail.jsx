@@ -26,7 +26,7 @@ const ScholarshipDetail = () => {
       }
 
       try {
-        const data = await getData('scholarships', scholarshipId); // Ensure getData is asynchronous
+        const data = await getData('scholarships', scholarshipId);
         if (data) {
           setScholarshipData(data);
         } else {
@@ -61,14 +61,14 @@ const ScholarshipDetail = () => {
     requirementArray = ['1', '2', '3'],
     benefitArray = ['1', '2', '3'],
     description = 'description is not available',
-    imgPath = 'beasiswa/tes.png', // Default empty image if not provided
+    imgUrl = 'beasiswa/global.png', // Default empty image if not provided
   } = scholarshipData;
 
   return (
-    <div className='poppins'>
-      <Header login={userId}/>
+    <div className='manrope min-h-screen'>
+      <Header login={userId} color={false} searchbar={true}/>
 
-      <div className='flex px-10 py-20 gap-5 bg-[#f7f7f7]'>
+      <div className='flex px-10 pt-14 pb-40 gap-5 bg-[#f7f7f7]'>
         <div className='w-full flex flex-col gap-2 px-5'>
           <div className='flex justify-between items-center'>
             <div className='text-xl font-semibold flex gap-3'>
@@ -83,28 +83,12 @@ const ScholarshipDetail = () => {
           </div>
 
           <div className='bg-blue-200 w-full h-[400px] rounded-lg'>
-            <img className='h-full w-full object-cover rounded-lg' src={imgPath || ''} alt='Scholarship' />
-          </div>
-
-          <div>{description}</div>
-        </div>
-
-        <div className='w-full flex flex-col gap-4'>
-          <div>
-            <h1 className='text-xl font-semibold mb-1'>Tags</h1>
-
-            <div className='flex gap-3 text-lg'>
-              {tagArray.map((tag, index) => (
-                <div key={index} className='text-gray-500'>
-                  {tag}
-                </div>
-              ))}
-            </div>
+            <img className='h-full w-full object-cover rounded-lg' src={imgUrl || ''} alt='Scholarship' />
           </div>
 
           <div className='flex justify-between items-center text-lg font-semibold'>
-            <h1 className='text-[#1C429A]'>
-              Duration: <span className='font-normal'>{startDate} -{">"} {endDate}</span>
+            <h1 className='text-[#1C429A] font-bold text-lg'>
+              Duration: <span className='font-semibold'>{startDate} - {endDate}</span>
             </h1>
 
             <button className='text-white flex gap-2 items-center bg-[#1C429A] px-4 py-2 rounded-lg'>
@@ -114,9 +98,24 @@ const ScholarshipDetail = () => {
               <h1>Apply Here</h1>
             </button>
           </div>
+        </div>
 
-          <div className='bg-white shadow-lg rounded-xl p-6 min-h-[200px]'>
-            <h1 className='font-semibold text-xl'>Requirements</h1>
+        <div className='w-full flex flex-col gap-4'>
+          <div className='flex gap-5 text-lg font-bold'>
+            {tagArray.map((tag, index) => (
+              <div key={index} className='text-gray-500'>
+                {tag}
+              </div>
+            ))}
+          </div>
+
+          <div className='font-semibold'>{description}</div>
+          <hr /> 
+
+          <div>
+            <div className='flex gap-5 text-[#1C429A] font-bold border-b-2'>
+              <h1>Requirements</h1>
+            </div>
 
             <ul className='list-disc list-inside ml-4 pt-2'>
               {requirementArray.map((req, index) => (
@@ -125,12 +124,14 @@ const ScholarshipDetail = () => {
             </ul>
           </div>
 
-          <div className='bg-white shadow-lg rounded-xl p-6 min-h-[200px]'>
-            <h1 className='font-semibold text-xl'>Benefits</h1>
+          <div>
+            <div className='flex gap-5 text-[#1C429A] font-bold border-b-2'>
+              <h1>Benefits</h1>
+            </div>
 
             <ul className='list-disc list-inside ml-4 pt-2'>
-              {benefitArray.map((benefit, index) => (
-                <li key={index}>{benefit}</li>
+              {benefitArray.map((req, index) => (
+                <li key={index}>{req}</li>
               ))}
             </ul>
           </div>

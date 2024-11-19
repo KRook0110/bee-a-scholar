@@ -98,7 +98,7 @@ const ScholarshipPreview = ({
 
   return (
     <div className='flex flex-col w-[420px] rounded-lg relative'>
-      <div className='flex justify-between mb-1'>
+      <div className='flex justify-between mb-2'>
         <div className='flex gap-5 text-sm font-semibold text-gray-500'>
           {category.map((c) => (
             <p>{c}</p>
