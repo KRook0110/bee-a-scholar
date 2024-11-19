@@ -1,5 +1,5 @@
-
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { ReactPropTypes } from "react";
 
 const currentDate = new Date();
 
@@ -32,18 +32,16 @@ function Calendar() {
                     className="bottom-0 bg-transparent text-l"
                     value={selectedMonth}
                     onChange={(event) => {
-                        setSelectedMonth(event.target.value);
+                        setSelectedMonth(Number(event.target.value));
                     }} >
                     {MONTH_NAMES.map((month, idx) => {
-                        return <option key={idx} value={idx}>{month}</option>
+                        return <option key={idx} value={idx}>{month} - {idx}</option>
                     })}
                 </select>
                 <select
                     className="bottom-0 bg-transparent text-l pr-[4px]"
                     value={selectedYear}
-                    onChange={(event) => {
-                        setSelectedYear(event.target.value);
-                    }}>
+                    onChange={(event) => { setSelectedYear(event.target.value); }}>
                     {
                         AVAILABLE_YEARS.map((year, idx) => {
                             return <option key={idx} value={year} className="">{year}</option>
@@ -62,7 +60,7 @@ function Calendar() {
                         return (<h1 key={idx}
                             className={`text-lg rounded-[16px] w-[100%] h-[90%] flex
                                     justify-center items-center text-[#1C429A]
-                                    font-bold ${(day === currentDate.getDate()) ? "bg-[#FFBC59]" : ""}`}>
+                                    font-bold ${(day === currentDate.getDate() && currentDate.getMonth() === selectedMonth && currentDate.getFullYear() === selectedYear) ? "bg-[#FFBC59]" : ""}`}>
                             {day}
                         </h1>)
                     })
@@ -73,5 +71,6 @@ function Calendar() {
 
 // <h1 className="">{MONTH_NAMES[selectedMonth]}</h1>
 // <img src={window.location.origin + "/icons/arrow_down.svg"} alt="" className="w-[24px]" />
+
 
 export default Calendar;

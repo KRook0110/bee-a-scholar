@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import SearchBar from '../components/SearchBar';
@@ -9,6 +9,7 @@ import { getCollection } from '../config/firebase';
 
 const Dashboard = () => {
     const { userId } = useUser();
+    const recommendationRef = useRef(null);
 
 
     /* ------------------------- States for search query ------------------------ */
@@ -45,7 +46,18 @@ const Dashboard = () => {
 
     return (
         <div className='manrope'>
-            <Header login={userId} color={false} searchbar={true} onFind={setSearchQuery} />
+            <Header login={userId} color={false} searchbar={true} onFind={(value) => {
+                setSearchQuery(value);
+                const section = recommendationRef.current;
+                if (section) {
+                    const rect = section.getBoundingClientRect();
+
+                    // Check if the section is out of view above or below
+                    if (rect.top > 0 || rect.bottom > window.innerHeight) {
+                        section.scrollIntoView({ behavior: "smooth" });
+                    }
+                }
+            }} />
 
             <div className='min-h-screen py-10 flex flex-col gap-8 px-20'>
                 {/* Highlights */}
@@ -54,7 +66,7 @@ const Dashboard = () => {
                 </section>
 
                 {/* Categories */}
-                <section className='flex flex-col gap-5'>
+                <section className='flex flex-col gap-5' ref={recommendationRef}>
                     <div className='flex gap-5 items-center'>
                         <div className='w-10'><img src="icons/honey.png" alt="" /></div>
                         <h1 className='font-bold text-2xl'>Categories</h1>
@@ -85,15 +97,14 @@ const Dashboard = () => {
                 </section>
 
                 {/* Recommended */}
-                <section className=''>
+                <section className='' >
                     <div className='flex gap-5 items-center'>
                         <div className='w-10'><img src="icons/honey.png" alt="" /></div>
                         <h1 className='font-bold text-2xl'>Recommended</h1>
                     </div>
 
-                    {/*<div className='flex flex-wrap gap-10 py-10'>*/}
                     <div className='gap-10 grid sm:grid-cols-1 xl:grid-cols-2 2xl:grid-cols-3 mx-[50px] mt-5'>
-                            {filteredScholarships.map((s, idx) => (
+                        {filteredScholarships.map((s, idx) => (
                             <div className="w-full flex items-center justify-center">
                                 <ScholarshipPreview
                                     userId={userId}
@@ -106,7 +117,7 @@ const Dashboard = () => {
                                     id={s.id}
                                 />
                             </div>
-                            ))}
+                        ))}
                     </div>
                 </section>
             </div>
