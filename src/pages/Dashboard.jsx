@@ -92,19 +92,21 @@ const Dashboard = () => {
                     </div>
 
                     {/*<div className='flex flex-wrap gap-10 py-10'>*/}
-                    <div className='gap-10 grid grid-cols-3 mx-[50px] mt-5'>
-                        {filteredScholarships.map((s, idx) => (
-                            <ScholarshipPreview
-                                userId={userId}
-                                key={idx}
-                                title={s.title}
-                                deadline={s.endDate}
-                                imgUrl={s.imgUrl}
-                                category={s.category}
-                                tags={s.tagArray}
-                                id={s.id}
-                            />
-                        ))}
+                    <div className='gap-10 grid sm:grid-cols-1 xl:grid-cols-2 2xl:grid-cols-3 mx-[50px] mt-5'>
+                            {filteredScholarships.map((s, idx) => (
+                            <div className="w-full flex items-center justify-center">
+                                <ScholarshipPreview
+                                    userId={userId}
+                                    key={idx}
+                                    title={s.title}
+                                    deadline={s.endDate}
+                                    imgUrl={s.imgUrl}
+                                    category={s.category}
+                                    tags={s.tagArray}
+                                    id={s.id}
+                                />
+                            </div>
+                            ))}
                     </div>
                 </section>
             </div>
