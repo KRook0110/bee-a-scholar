@@ -8,6 +8,7 @@ const Header = ({
   color = true,
   searchbar = false,
   searchbarPH = "Find your opportunity",
+  searchbarDef = "",
   onFind = (value) => { },
 }) => {
   const { userId, setUserId } = useUser();
@@ -30,7 +31,7 @@ const Header = ({
     fetchUserData();
   }, [userId]);
 
-  const [searchValue, setSearchValue] = useState("");
+  const [searchValue, setSearchValue] = useState(searchbarDef);
 
 
   return (
@@ -50,6 +51,7 @@ const Header = ({
             <img className='w-full' src="icons/search.png" alt="" />
           </div>
           <input
+            type='text'
             placeholder={searchbarPH}
             value={searchValue}
             onChange={(event) => { setSearchValue(event.target.value)}}

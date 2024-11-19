@@ -14,7 +14,6 @@ const Dashboard = () => {
     const navigate = useNavigate();
 
     /* ------------------------- States for search query ------------------------ */
-    const [filter, setFilter] = useState("all");
     const [searchQuery, setSearchQuery] = useState("");
     const [scholarships, setScholarships] = useState([]);
 
@@ -28,67 +27,55 @@ const Dashboard = () => {
         fetchScholarships();
     }, []);
 
-    /* ---------- Filter scholarships based on category and title match --------- */
-    const filteredScholarships = scholarships.filter((s) => {
-        const matchesFilter = filter === "all" || s.category?.includes(filter);
-        const matchesSearchQuery = s.title?.toLowerCase().includes(searchQuery.toLowerCase());
-        return matchesFilter && matchesSearchQuery;
-    });
-
-    // const handleNavigate = () => {
-    //   navigate('/search-page', {
-    //     state: {scholarships: filteredScholarships}
-    //   });
-    // };
+    const handleNavigate = ({searchVal="", filterVal="all"}) => {
+      navigate('/search-page', {
+        state: {search: searchVal, filter: filterVal}
+      });
+    };
 
     return (
         <div className='manrope'>
             <Header login={userId} searchbar={true} onFind={(value) => {
-                setSearchQuery(value);
-                const section = recommendationRef.current;
-                if (section) {
-                    const rect = section.getBoundingClientRect();
-
-                    // Check if the section is out of view above or below
-                    if (rect.top > 0 || rect.bottom > window.innerHeight) {
-                        section.scrollIntoView({ behavior: "smooth" });
-                    }
-                }
+                handleNavigate({searchVal: value});
             }} />
 
-            <div className='min-h-screen flex flex-col gap-8 mb-40'>
+            <div className='min-h-screen flex flex-col mb-40'>
                 {/* Highlights */}
                 <section
                   className=
-                  'px-80 pt-2 pb-14 bg-gradient-to-b from-[#1C429A] to-[#3089D6] shadow-md'>
+                  'px-80 pt-2 pb-14 bg-gradient-to-b from-[#1C429A] to-[#3089D6] shadow-md relative'>
                     <Carousel />
+
+                    <div className='absolute w-60 z-0 right-[-3%] top-[-20%]'><img src="icons/honey.png" alt="" /></div>
+
+                    <div className='absolute w-60 z-0 left-[-3%] bottom-[-20%]'><img src="icons/honey.png" alt="" /></div>
                 </section>
 
                 {/* Categories */}
-                <section className='flex flex-col gap-5 px-20' ref={recommendationRef}>
+                <section className='flex flex-col gap-5 py-12 px-20 z-[1] bg-white' ref={recommendationRef}>
                     <div className='flex gap-5 items-center'>
                         <div className='w-10'><img src="icons/honey.png" alt="" /></div>
                         <h1 className='font-bold text-2xl'>Categories</h1>
                     </div>
 
                     <div className='flex gap-10 justify-center'>
-                        <button onClick={() => setFilter("all")}>
+                        <button onClick={() => handleNavigate({filterVal:'all'})}>
                             <img src="illustration/all_scholarship.png" alt="" className='w-60 hover:opacity-90' />
                         </button>
 
-                        <button onClick={() => setFilter("Academic")}>
+                        <button onClick={() => handleNavigate({filterVal:'Academic'})}>
                             <img src="illustration/academic_scholarship.png" alt="" className='w-60 hover:opacity-90' />
                         </button>
 
-                        <button onClick={() => setFilter("Non-academic")}>
+                        <button onClick={() => handleNavigate({filterVal:'Non-academic'})}>
                             <img src="illustration/non_academic_scholarship.png" alt="" className='w-60 hover:opacity-90' />
                         </button>
 
-                        <button onClick={() => setFilter("Research")}>
+                        <button onClick={() => handleNavigate({filterVal:'Research'})}>
                             <img src="illustration/research_scholarship.png" alt="" className='w-60 hover:opacity-90' />
                         </button>
 
-                        <button onClick={() => setFilter("Career")}>
+                        <button onClick={() => handleNavigate({filterVal:'Career'})}>
                             <img src="illustration/career_scholarship.png" alt="" className='w-60 hover:opacity-90' />
                         </button>
 
@@ -103,7 +90,7 @@ const Dashboard = () => {
                     </div>
 
                     <div className='gap-10 grid sm:grid-cols-1 xl:grid-cols-2 2xl:grid-cols-3 mt-5'>
-                        {filteredScholarships.map((s, idx) => (
+                        {scholarships.map((s, idx) => (
                             <div className="w-full flex items-center justify-center">
                                 <ScholarshipPreview
                                     userId={userId}
