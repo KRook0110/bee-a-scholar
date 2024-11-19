@@ -2,9 +2,9 @@ import { useState, useEffect } from "react";
 
 function Carousel({
     image_urls = [
-        "https://plus.unsplash.com/premium_photo-1664474619075-644dd191935f?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8aW1hZ2V8ZW58MHx8MHx8fDA%3D",
-        "https://plus.unsplash.com/premium_photo-1664474619075-644dd191935f?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8aW1hZ2V8ZW58MHx8MHx8fDA%3D",
-        "https://plus.unsplash.com/premium_photo-1664474619075-644dd191935f?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8aW1hZ2V8ZW58MHx8MHx8fDA%3D",
+      'beasiswa/womenstem.jpg',
+      'beasiswa/womenstem.jpg',
+      'beasiswa/womenstem.jpg'
     ],
 }) {
     const n = image_urls.length;
@@ -23,7 +23,7 @@ function Carousel({
     }, [currentImageIdx])
 
     return (<>
-        <div className='h-80 relative w-full rounded-lg overflow-hidden'>
+        <div className='h-96 relative w-full rounded-lg overflow-hidden'>
             {
                 image_urls.map((url, idx) => {
                     let style;
@@ -35,17 +35,19 @@ function Carousel({
                             key={idx}
                             src={url}
                             alt=""
-                            className={`absolute bg-gray-600 w-full h-full rounded-lg object-contain transition-all ease-in-out ${style}`} />
+                            className={`absolute bg-gray-600 w-full h-full rounded-lg object-cover transition-all ease-in-out ${style}`} />
                     </>)
                 })
             }
+
             <div className="absolute h-full left-0 flex flex-col items-center justify-center" onClick={goLeft}>
-                <svg className="rotate-90 ml-2" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg className="rotate-90 ml-2 bg-gray-500 rounded-full p-1 cursor-pointer" width="36" height="36" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M4 9L12 17L20 9" stroke="#FFF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
                 </svg>
             </div>
+
             <div className="absolute h-full right-0 flex flex-col items-center justify-center" onClick={goRight}>
-                <svg className="-rotate-90 mr-2" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg className="-rotate-90 mr-2 bg-gray-500 rounded-full p-1 cursor-pointer" width="36" height="36" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M4 9L12 17L20 9" stroke="#FFF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
                 </svg>
             </div>

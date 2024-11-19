@@ -3,7 +3,7 @@ import { FaTwitter, FaInstagram, FaYoutube, FaLinkedin } from "react-icons/fa";
 
 const Footer = () => {
   return (
-    <footer className="bg-[#232323] text-white py-10 w-full">
+    <footer className="manrope bg-[#232323] text-white py-10 w-full">
       <div className="container mx-auto flex items-center px-[10%]">
         <div className="flex flex-col items-start md:flex-row w-full max-w-4xl text-left gap-10 sm:gap-14 lg:gap-28">
           {/* Logo and Social Media Section */}
@@ -18,7 +18,7 @@ const Footer = () => {
               <span className="text-lg font-bold">Bee-a-Scholar</span>
             </div>
             {/* Social Media Icons */}
-            <div className="flex space-x-4 mt-4">
+            <div className="flex w-full justify-end space-x-4 mt-4">
               <a href="#" aria-label="Twitter" className="hover:text-gray-400">
                 <FaTwitter size={24} />
               </a>

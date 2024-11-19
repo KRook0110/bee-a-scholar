@@ -36,7 +36,7 @@ const Header = ({
   return (
     <>
       {/* Header */}
-      <header className={`fixed top-0 left-0 right-0 flex justify-between items-center px-2 md:px-8 py-2 z-10 ${color ? 'bg-[#1C429A] text-white' : 'bg-white text-black border-b shadow-sm'}`}>
+      <header className={`manrope fixed top-0 left-0 right-0 flex justify-between items-center px-2 md:px-8 py-2 z-10 ${color ? 'bg-[#1C429A] text-white' : 'bg-white text-black border-b shadow-sm'}`}>
         {/* Left side */}
         <a href={link.home} className="flex items-center gap-3">
           <div className="w-12">
@@ -46,17 +46,17 @@ const Header = ({
 
         {/* SearchBar */}
         <section className={`flex gap-5 px-10 w-full ${searchbar ? 'block' : 'hidden'}`}>
-          <div className='w-4 flex items-center justify-center'>
+          <div className={`w-4 flex items-center justify-center ${color ? 'filter invert' : ''}`}>
             <img className='w-full' src="icons/search.png" alt="" />
           </div>
           <input
             placeholder={searchbarPH}
             value={searchValue}
-            onChange={(event) => { setSearchValue(event.target.value) }}
+            onChange={(event) => { setSearchValue(event.target.value)}}
             onKeyDown={(event) => {
               if (event.key === "Enter") { onFind(searchValue); console.log(searchValue) }
             }}
-            className='text-gray-600 font-bold text-lg w-full focus:outline-none'
+            className={`font-bold text-lg w-full focus:outline-none ${color ? 'placeholder-white text-white bg-[#1C429A]' : 'text-gray-600'}`}
             autoFocus
           />
         </section>
@@ -88,7 +88,7 @@ const Header = ({
       <div className="h-[55px]"></div> {/* Spacer */}
 
       {/* Sidebar */}
-      <div className={`fixed top-0 bottom-0 w-full md:w-1/4 bg-white px-10 py-5 z-30 transition-all ease-in-out ${isSidebarVisible ? 'right-0' : 'right-[-100%] md:right-[-25%]'}`}>
+      <div className={`manrope fixed top-0 bottom-0 w-full md:w-1/4 bg-white px-10 py-5 z-30 transition-all ease-in-out font-semibold ${isSidebarVisible ? 'right-0' : 'right-[-100%] md:right-[-25%]'}`}>
         {/* Close button */}
         <div className="flex justify-end">
           <button onClick={() => setIsSidebarVisible(false)} className="w-6 mb-10">
@@ -120,11 +120,11 @@ const Header = ({
 
         {/* Settings */}
         <div className="text-[#5F5F5F] bg-[#EAEAEA] pr-10 pl-5 py-5 rounded-lg flex flex-col gap-3">
-          <a href="" className="flex items-center gap-3">
+          <a href="/dashboard" className="flex items-center gap-3">
             <div className="w-5 flex justify-center items-center">
-              <img src="icons/wrench.png" alt="Settings" />
+              <img src="icons/laptop.png" alt="Settings" />
             </div>
-            <p>Settings</p>
+            <p>Dashboard</p>
           </a>
 
           <a href="/pinned-scholarships" className="flex items-center gap-3">
@@ -134,11 +134,11 @@ const Header = ({
             <p>Pinned Scholarships</p>
           </a>
 
-          <a href="/calendar" className="flex items-center gap-3">
+          <a href="" className="flex items-center gap-3">
             <div className="w-5 flex justify-center items-center">
-              <img src="icons/calendar.png" alt="Calculator" />
+              <img src="icons/wrench.png" alt="Settings" />
             </div>
-            <p>Calendar</p>
+            <p>Settings</p>
           </a>
         </div>
 

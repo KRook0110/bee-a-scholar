@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { db } from '../config/firebase'; // Firebase config import
-import { doc, updateDoc, arrayUnion, arrayRemove, getDoc } from 'firebase/firestore';
+import { getData, getRef } from '../config/firebase';
+import { arrayRemove, arrayUnion, updateDoc } from 'firebase/firestore';
 
 const ScholarshipPreview = ({
   userId,
@@ -14,20 +14,24 @@ const ScholarshipPreview = ({
   pinned = false
 }) => {
 
-  console.log(userId)
   const navigate = useNavigate();
+  const handleNavigate = () => {
+    navigate('/detail', {
+      state: {scholarShipId: id}
+    });
+  };
+
+  
+  /* -------------------------------- Pin Logic ------------------------------- */
   const [isPinned, setIsPinned] = useState(pinned);
 
-  // Fetch user data to check if the scholarship is pinned
   useEffect(() => {
     const fetchUserData = async () => {
       if (userId) {
         try {
-          const userRef = doc(db, 'users', userId);
-          const userDoc = await getDoc(userRef);
-          if (userDoc.exists()) {
-            const userData = userDoc.data();
-            // Check if the scholarship ID is in the pinnedScholarships array
+          const userData = await getData('users', userId)
+
+          if (userData) {
             if (userData.pinnedScholarships && userData.pinnedScholarships.includes(id)) {
               setIsPinned(true);
             }
@@ -41,33 +45,27 @@ const ScholarshipPreview = ({
     fetchUserData();
   }, [userId, id]);
 
-  const handleNavigate = () => {
-    navigate('/detail', {
-      state: {scholarShipId: id}
-    });
-  };
-
   const handlePinClick = async () => {
     if (userId) {
       try {
-        const userRef = doc(db, 'users', userId);
+        const userRef = await getRef('users', userId);
 
         if (isPinned) {
-          // If already pinned, remove the ID from the array
           await updateDoc(userRef, {
             pinnedScholarships: arrayRemove(id)
           });
           setIsPinned(false);
           console.log("Scholarship unpinned successfully!");
-        } else {
-          // If not pinned, add the ID to the array
+        }
+        else {
           await updateDoc(userRef, {
             pinnedScholarships: arrayUnion(id)
           });
           setIsPinned(true);
           console.log("Scholarship pinned successfully!");
         }
-      } catch (error) {
+      }
+      catch (error) {
         console.error("Error pinning/unpinning scholarship:", error);
       }
     } else {
@@ -75,7 +73,8 @@ const ScholarshipPreview = ({
     }
   };
 
-  // Predefined rainbow colors optimized for white backgrounds
+
+  /* ------------------------------- Color Logic ------------------------------ */
   const rainbowColors = [
     "#E63946", // Red
     "#F4A261", // Orange
@@ -96,6 +95,8 @@ const ScholarshipPreview = ({
     return colors;
   }, [tags]);
 
+
+  /* ------------------------------ Main Content ------------------------------ */
   return (
     <div className='flex flex-col w-[420px] rounded-lg relative'>
       <div className='flex justify-between mb-2'>
@@ -132,7 +133,7 @@ const ScholarshipPreview = ({
         </div>
 
         <div className='flex items-end text-right'>
-          <button className='text-[#EC9B21] hover:text-[#FFBD5A] font-semibold text-sm' onClick={handleNavigate}>
+          <button className='bg-[#EC9B21] text-white px-2 py-1 rounded-md font-semibold text-xs' onClick={handleNavigate}>
             More Details
           </button>
         </div>

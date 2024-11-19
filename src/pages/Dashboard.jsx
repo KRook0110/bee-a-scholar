@@ -1,40 +1,32 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import SearchBar from '../components/SearchBar';
 import ScholarshipPreview from '../components/ScholarshipPreview';
 import Carousel from '../components/Carousel';
 import { useUser } from '../config/useContext';
 import { getCollection } from '../config/firebase';
+import { useNavigate } from 'react-router-dom';
 
 const Dashboard = () => {
     const { userId } = useUser();
     const recommendationRef = useRef(null);
 
+    const navigate = useNavigate();
 
     /* ------------------------- States for search query ------------------------ */
     const [filter, setFilter] = useState("all");
     const [searchQuery, setSearchQuery] = useState("");
     const [scholarships, setScholarships] = useState([]);
-    const [loading, setLoading] = useState(true);
-
 
     /* -------------- Fetch scholarships when the component mounts -------------- */
     useEffect(() => {
         const fetchScholarships = async () => {
-            setLoading(true);
             const data = await getCollection("scholarships");
             setScholarships(data);
-            setLoading(false);
         };
 
         fetchScholarships();
     }, []);
-
-    if (loading) {
-        return <div>Loading...</div>;
-    }
-
 
     /* ---------- Filter scholarships based on category and title match --------- */
     const filteredScholarships = scholarships.filter((s) => {
@@ -43,10 +35,15 @@ const Dashboard = () => {
         return matchesFilter && matchesSearchQuery;
     });
 
+    // const handleNavigate = () => {
+    //   navigate('/search-page', {
+    //     state: {scholarships: filteredScholarships}
+    //   });
+    // };
 
     return (
         <div className='manrope'>
-            <Header login={userId} color={false} searchbar={true} onFind={(value) => {
+            <Header login={userId} searchbar={true} onFind={(value) => {
                 setSearchQuery(value);
                 const section = recommendationRef.current;
                 if (section) {
@@ -59,14 +56,16 @@ const Dashboard = () => {
                 }
             }} />
 
-            <div className='min-h-screen py-10 flex flex-col gap-8 px-20'>
+            <div className='min-h-screen flex flex-col gap-8 mb-40'>
                 {/* Highlights */}
-                <section>
+                <section
+                  className=
+                  'px-80 pt-2 pb-14 bg-gradient-to-b from-[#1C429A] to-[#3089D6] shadow-md'>
                     <Carousel />
                 </section>
 
                 {/* Categories */}
-                <section className='flex flex-col gap-5' ref={recommendationRef}>
+                <section className='flex flex-col gap-5 px-20' ref={recommendationRef}>
                     <div className='flex gap-5 items-center'>
                         <div className='w-10'><img src="icons/honey.png" alt="" /></div>
                         <h1 className='font-bold text-2xl'>Categories</h1>
@@ -97,13 +96,13 @@ const Dashboard = () => {
                 </section>
 
                 {/* Recommended */}
-                <section className='' >
+                <section className='px-20' >
                     <div className='flex gap-5 items-center'>
                         <div className='w-10'><img src="icons/honey.png" alt="" /></div>
                         <h1 className='font-bold text-2xl'>Recommended</h1>
                     </div>
 
-                    <div className='gap-10 grid sm:grid-cols-1 xl:grid-cols-2 2xl:grid-cols-3 mx-[50px] mt-5'>
+                    <div className='gap-10 grid sm:grid-cols-1 xl:grid-cols-2 2xl:grid-cols-3 mt-5'>
                         {filteredScholarships.map((s, idx) => (
                             <div className="w-full flex items-center justify-center">
                                 <ScholarshipPreview

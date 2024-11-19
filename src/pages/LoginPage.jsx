@@ -47,7 +47,7 @@ const LoginPage = () => {
 
   /* --------------------------------- Content -------------------------------- */
   return (
-    <div className="poppins flex flex-col min-h-screen w-full">
+    <div className="manrope flex flex-col min-h-screen w-full">
       <Header login={userId}/>
 
       <main className="flex items-center justify-center bg-gradient-to-b from-[#1C429A] to-[#3089D6]">
@@ -55,11 +55,11 @@ const LoginPage = () => {
           
           {/* Left Side - Text and Logo */}
           <div className="hidden w-full h-full md:text-left mb-6 md:mb-0 lg:flex flex-col gap-3 px-20 text-white justify-center relative">
-            <h1 className="text-6xl font-semibold">
+            <h1 className="text-6xl font-extrabold">
               Welcome back, old friend.
             </h1>
 
-            <h2 className="text-3xl">
+            <h2 className="text-3xl font-bold">
               We’re glad that you’d have us in your academic adventures again.
             </h2>
 
@@ -113,7 +113,7 @@ const LoginPage = () => {
                         className={`bg-[#FFBD5A] text-white py-3 font-semibold rounded-md hover:opacity-90 transition ${loading ? "opacity-50" : ""} px-20`} // Disable button when loading
                         disabled={loading} // Disable button during loading
                     >
-                        {loading ? "Logging in..." : "LOGIN"} {/* Change button text during loading */}
+                        {loading ? "Logging in..." : "Login"} {/* Change button text during loading */}
                     </button>
                   </div>
 

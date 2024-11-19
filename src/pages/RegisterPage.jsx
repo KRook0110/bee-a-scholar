@@ -72,7 +72,7 @@ const RegisterPage = () => {
 
   /* --------------------------------- Content -------------------------------- */
   return (
-    <div className="poppins">
+    <div className="manrope">
 
       {/* Content */}
       <Header login={userId}/>
@@ -82,11 +82,11 @@ const RegisterPage = () => {
           
           {/* Left Side - Text and Logo */}
           <div className="hidden w-full h-full md:text-left mb-6 md:mb-0 lg:flex flex-col gap-3 px-20 text-white justify-center relative">
-            <h1 className="text-6xl font-semibold">
+            <h1 className="text-6xl font-extrabold">
               Sign-up for an account for free.
             </h1>
 
-            <h2 className="text-3xl font-semibold">
+            <h2 className="text-3xl font-bold">
               Begin your path to opportunity with us today, free of charge.
             </h2>
 
@@ -196,7 +196,7 @@ const RegisterPage = () => {
                   type="submit"
                   className="bg-[#FFBD5A] font-semibold text-white rounded-md hover:opacity-90 transition px-12 py-3"
                 >
-                  SIGN UP
+                  Sign Up
                 </button>
               </div>
               

@@ -8,8 +8,8 @@ import Dashboard from './pages/Dashboard';
 import AdminForm from './pages/AdminForm';
 import ScholarshipDetail from './pages/ScholarshipDetail';
 import { UserProvider } from './config/useContext';
-import PinnedScholarship from './pages/PinnedScholarship';
 import CalendarPage from './pages/CalendarPage';
+import SearchPage from './pages/SearchPage';
 
 function App() {
   return (
@@ -23,8 +23,8 @@ function App() {
           <Route path="/add-scholarship" element={<AdminForm />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/detail" element={<ScholarshipDetail />} />
-          <Route path="/pinned-scholarships" element={<PinnedScholarship />} />
-          <Route path="/calendar" element={<CalendarPage />} />
+          <Route path="/pinned-scholarships" element={<CalendarPage />} />
+          <Route path="/search-page" element={<SearchPage />} />
         </Routes>
       </BrowserRouter>
     </UserProvider>

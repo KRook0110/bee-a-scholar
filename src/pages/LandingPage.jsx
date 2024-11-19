@@ -224,7 +224,7 @@ const LandingPage = () => {
                   <p className='text-sm sm:text-base'>Sign up for an account now, for completely free.</p>
                 </div>
 
-                <a  className='bg-[#FFBD5A] sm:text-lg font-semibold py-2 px-8 rounded-lg text-white'>GET STARTED</a>
+                <a href="/register" className='bg-[#FFBD5A] sm:text-lg font-semibold py-2 px-8 rounded-lg text-white'>Get Started</a>
               </div>
             </div>
           </div>
