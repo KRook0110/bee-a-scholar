@@ -43,7 +43,7 @@ const Dashboard = () => {
 
   return (
     <div className='manrope'>
-      <Header login={userId} color={false} searchbar={true}/>
+      <Header login={userId} color={false} searchbar={true} onFind={setSearchQuery}/>
 
       <div className='min-h-screen py-10 flex flex-col gap-8 px-20'>
         {/* Highlights */}
@@ -61,21 +61,26 @@ const Dashboard = () => {
           </div>
 
           <div className='flex gap-10 justify-center'>
-            <button>
+            <button onClick={()=> setFilter("all") }>
+              <img src="illustration/all_scholarship.png" alt="" className='w-60 hover:opacity-90'/>
+            </button>
+
+            <button onClick={()=> setFilter("Academic") }>
               <img src="illustration/academic_scholarship.png" alt="" className='w-60 hover:opacity-90'/>
             </button>
 
-            <button>
+            <button onClick={()=> setFilter("Non-academic") }>
               <img src="illustration/non_academic_scholarship.png" alt="" className='w-60 hover:opacity-90'/>
             </button>
 
-            <button>
+            <button onClick={()=> setFilter("Research") }>
               <img src="illustration/research_scholarship.png" alt="" className='w-60 hover:opacity-90'/>
             </button>
 
-            <button>
+            <button onClick={()=> setFilter("Career") }>
               <img src="illustration/career_scholarship.png" alt="" className='w-60 hover:opacity-90'/>
             </button>
+
           </div>
         </section>
 

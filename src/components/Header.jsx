@@ -5,9 +5,10 @@ import { useUser } from '../config/useContext';
 
 const Header = ({
   login,
-  color=true,
-  searchbar=false,
-  searchbarPH="Find your opportunity" 
+  color = true,
+  searchbar = false,
+  searchbarPH = "Find your opportunity",
+  onFind = (value) => { },
 }) => {
   const { userId, setUserId } = useUser();
   const [userData, setUserData] = useState(null);
@@ -29,6 +30,8 @@ const Header = ({
     fetchUserData();
   }, [userId]);
 
+  const [searchValue, setSearchValue] = useState("");
+
 
   return (
     <>
@@ -46,8 +49,13 @@ const Header = ({
           <div className='w-4 flex items-center justify-center'>
             <img className='w-full' src="icons/search.png" alt="" />
           </div>
-          <input 
+          <input
             placeholder={searchbarPH}
+            value={searchValue}
+            onChange={(event) => { setSearchValue(event.target.value) }}
+            onKeyDown={(event) => {
+              if (event.key === "Enter") { onFind(searchValue); console.log(searchValue) }
+            }}
             className='text-gray-600 font-bold text-lg w-full focus:outline-none'
             autoFocus
           />
@@ -69,7 +77,7 @@ const Header = ({
               <a href="" className={`w-6 ${color ? 'filter invert' : ''}`}>
                 <img src="icons/profile.png" alt="Profile" />
               </a>
-              
+
               <button onClick={() => setIsSidebarVisible(true)} className={`w-6 ${color ? 'filter invert' : ''}`}>
                 <img src="icons/burger_menu.svg" alt="Menu" />
               </button>
