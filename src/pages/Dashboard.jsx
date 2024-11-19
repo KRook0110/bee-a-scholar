@@ -45,7 +45,7 @@ const Dashboard = () => {
     <div className='manrope'>
       <Header login={userId} color={false} searchbar={true}/>
 
-      <div className='min-h-screen py-10 flex flex-col gap-8 px-40'>
+      <div className='min-h-screen py-10 flex flex-col gap-8 px-20'>
         {/* Highlights */}
         <section>
           <div className='h-80'>
@@ -86,14 +86,14 @@ const Dashboard = () => {
             <h1 className='font-bold text-2xl'>Recommended</h1>
           </div>
 
-          <div className='flex flex-wrap gap-5 py-10'>
+          <div className='flex flex-wrap gap-10 py-10'>
             {filteredScholarships.map((s, idx) => (
               <ScholarshipPreview
                 userId={userId}
                 key={idx}
                 title={s.title}
                 deadline={s.endDate}
-                imgUrl={s.imgPath}
+                imgUrl={s.imgUrl}
                 category={s.category}
                 tags={s.tagArray}
                 id={s.id}

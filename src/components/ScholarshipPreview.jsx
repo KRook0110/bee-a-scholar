@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { db } from '../config/firebase'; // Firebase config import
 import { doc, updateDoc, arrayUnion, arrayRemove, getDoc } from 'firebase/firestore';
@@ -75,22 +75,54 @@ const ScholarshipPreview = ({
     }
   };
 
+  // Predefined rainbow colors optimized for white backgrounds
+  const rainbowColors = [
+    "#E63946", // Red
+    "#F4A261", // Orange
+    "#E9C46A", // Yellow
+    "#2A9D8F", // Green
+    "#457B9D", // Blue
+    "#4C5A9A", // Indigo
+    "#9D4EDD", // Violet
+  ];
+
+  // Shuffle colors and memoize to ensure they stay the same on re-render
+  const shuffledColors = useMemo(() => {
+    const colors = [...rainbowColors];
+    for (let i = colors.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [colors[i], colors[j]] = [colors[j], colors[i]];
+    }
+    return colors;
+  }, [tags]);
+
   return (
-    <div className='flex flex-col w-[400px] rounded-lg relative'>
-      <div className='flex justify-between mb-3'>
-        <div className='flex gap-3'>
+    <div className='flex flex-col w-[420px] rounded-lg relative'>
+      <div className='flex justify-between mb-1'>
+        <div className='flex gap-5 text-sm font-semibold text-gray-500'>
           {category.map((c) => (
-            <p className='text-black bg-[#FFBD5A] px-2 rounded-full'>{c}</p>
+            <p>{c}</p>
           ))}
         </div>
         
-        <button onClick={handlePinClick} className='w-4'>
+        <button onClick={handlePinClick} className='w-3'>
           <img src={isPinned ? "icons/pin_full.png" : "icons/pin.png"} alt="Pin" />
         </button>
       </div>
 
       <div className='w-full h-[220px] bg-white rounded-lg mb-2'>
         <img className='h-full w-full object-cover rounded-lg' src={imgUrl} alt="" />
+      </div>
+
+      <div className="flex flex-wrap gap-3 mb-2 text-xs font-bold">
+        {tags.map((c, index) => (
+          <p
+            key={index}
+            style={{ color: shuffledColors[index % shuffledColors.length] }}
+          >
+            {c}
+          </p>
+        ))}
       </div>
 
       <div className='flex justify-between w-full'>
@@ -104,12 +136,6 @@ const ScholarshipPreview = ({
             More Details
           </button>
         </div>
-      </div>
-
-      <div className='flex gap-3 mt-3'>
-        {tags.map((c) => (
-          <p className='text-white bg-[#1c9a55] px-2 rounded-full'>{c}</p>
-        ))}
       </div>
     </div>
   );
