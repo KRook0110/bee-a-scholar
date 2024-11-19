@@ -90,7 +90,7 @@ const RegisterPage = () => {
               Begin your path to opportunity with us today, free of charge.
             </h2>
 
-            <div className='absolute w-80 right-[-35%] bottom-10 z-0'>
+            <div className='absolute w-80 right-[-35%] bottom-0 z-0'>
               <img className='w-full' src="icons/honey.png" alt="" />
             </div>
 

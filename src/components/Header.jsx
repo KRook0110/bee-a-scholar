@@ -3,10 +3,16 @@ import { link } from '../config/data';
 import { getData, handleLogout } from '../config/firebase';
 import { useUser } from '../config/useContext';
 
-const Header = ({ login }) => {
+const Header = ({
+  login,
+  color=true,
+  searchbar=false,
+  searchbarPH="Find your opportunity" 
+}) => {
   const { userId, setUserId } = useUser();
   const [userData, setUserData] = useState(null);
-  const [isSidebarVisible, setIsSidebarVisible] = useState(false); // Renamed for clarity
+  const [isSidebarVisible, setIsSidebarVisible] = useState(false);
+
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -23,41 +29,55 @@ const Header = ({ login }) => {
     fetchUserData();
   }, [userId]);
 
+
   return (
     <>
       {/* Header */}
-      <header className={`fixed top-0 left-0 right-0 flex justify-between items-center px-2 md:px-8 py-4 z-10 ${!login ? 'bg-[#1C429A] text-white' : 'bg-white text-black'}`}>
+      <header className={`fixed top-0 left-0 right-0 flex justify-between items-center px-2 md:px-8 py-2 z-10 ${color ? 'bg-[#1C429A] text-white' : 'bg-white text-black border-b shadow-sm'}`}>
         {/* Left side */}
         <a href={link.home} className="flex items-center gap-3">
-          <div className="w-16">
+          <div className="w-12">
             <img src="icons/logo.png" alt="Logo" />
           </div>
-          <h1 className="font-semibold md:text-2xl hidden md:block">Bee-a-Scholar</h1>
         </a>
+
+        {/* SearchBar */}
+        <section className={`flex gap-5 px-10 w-full ${searchbar ? 'block' : 'hidden'}`}>
+          <div className='w-4 flex items-center justify-center'>
+            <img className='w-full' src="icons/search.png" alt="" />
+          </div>
+          <input 
+            placeholder={searchbarPH}
+            className='text-gray-600 font-bold text-lg w-full focus:outline-none'
+            autoFocus
+          />
+        </section>
 
         {/* Right side */}
         <div className="flex gap-6">
           {!login ? (
             <>
               <a href={link.regis} className="font-semibold px-6 py-3 bg-[#EC9B21] rounded-lg flex items-center justify-center text-sm md:text-base">
-                GET STARTED
+                Get Started
               </a>
               <a href="" className="font-semibold px-6 py-3 rounded-lg flex items-center justify-center text-sm md:text-base">
-                CONTACT US
+                Contact Us
               </a>
             </>
           ) : (
             <>
-              <a href="" className="w-10">
+              <a href="" className={`w-6 ${color ? 'filter invert' : ''}`}>
                 <img src="icons/profile.png" alt="Profile" />
               </a>
-              <button onClick={() => setIsSidebarVisible(true)} className="w-10">
+              
+              <button onClick={() => setIsSidebarVisible(true)} className={`w-6 ${color ? 'filter invert' : ''}`}>
                 <img src="icons/burger_menu.svg" alt="Menu" />
               </button>
             </>
           )}
         </div>
       </header>
+      <div className="h-[55px]"></div> {/* Spacer */}
 
       {/* Sidebar */}
       <div className={`fixed top-0 bottom-0 w-full md:w-1/4 bg-white px-10 py-5 z-30 transition-all ease-in-out ${isSidebarVisible ? 'right-0' : 'right-[-100%] md:right-[-25%]'}`}>
@@ -98,17 +118,19 @@ const Header = ({ login }) => {
             </div>
             <p>Settings</p>
           </a>
+
           <a href="/pinned-scholarships" className="flex items-center gap-3">
             <div className="w-5 flex justify-center items-center">
-              <img className="h-4" src="icons/pin.png" alt="Pinned" />
+              <img className="h-5" src="icons/pin_gray.png" alt="Pinned" />
             </div>
             <p>Pinned Scholarships</p>
           </a>
-          <a href="" className="flex items-center gap-3">
+
+          <a href="/calendar" className="flex items-center gap-3">
             <div className="w-5 flex justify-center items-center">
-              <img src="icons/calculator.png" alt="Calculator" />
+              <img src="icons/calendar.png" alt="Calculator" />
             </div>
-            <p>Compatibility Scorer</p>
+            <p>Calendar</p>
           </a>
         </div>
 
@@ -143,8 +165,6 @@ const Header = ({ login }) => {
 
       {/* Background Overlay */}
       <div className={`fixed top-0 right-0 left-0 bottom-0 bg-black transition-all ease-in-out delay-500 ${isSidebarVisible ? 'block opacity-20 z-20' : 'hidden opacity-0 z-[-1]'}`}></div>
-
-      <div className="h-20"></div> {/* Spacer */}
     </>
   );
 };

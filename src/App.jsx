@@ -4,7 +4,7 @@ import LandingPage from './pages/LandingPage';
 import RegisterPage from './pages/RegisterPage';
 import LoginPage from './pages/LoginPage';
 import AdminDashboard from './pages/AdminDashboard';
-import MainPage from './pages/MainPage';
+import Dashboard from './pages/Dashboard';
 import AdminForm from './pages/AdminForm';
 import ScholarshipDetail from './pages/ScholarshipDetail';
 import { UserProvider } from './config/useContext';
@@ -21,11 +21,10 @@ function App() {
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/admin-dashboard" element={<AdminDashboard />} />
           <Route path="/add-scholarship" element={<AdminForm />} />
-          <Route path="/dashboard" element={<MainPage />} />
+          <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/detail" element={<ScholarshipDetail />} />
           <Route path="/pinned-scholarships" element={<PinnedScholarship />} />
           <Route path="/calendar" element={<CalendarPage />} />
-
         </Routes>
       </BrowserRouter>
     </UserProvider>
