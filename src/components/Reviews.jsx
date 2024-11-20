@@ -27,7 +27,7 @@ const Reviews = () => {
     }
 
     setButtonList(temp_button)
-    
+
   }, [idx])
 
 
@@ -38,7 +38,7 @@ const Reviews = () => {
           <button onClick={() => {
             manageReview(idx - 1)
           }}>
-            <img className='w-8 invert' src="icons/Arrow_Reverse.png" alt=""/>
+            <img className='w-8 invert' src="icons/arrow_reverse.png" alt=""/>
           </button>
         </div>
 
@@ -55,7 +55,7 @@ const Reviews = () => {
           <button onClick={() => {
             manageReview(idx + 1)
           }}>
-            <img className='w-8 invert' src="icons/Arrow.png" alt=""/>
+            <img className='w-8 invert' src="icons/arrow.png" alt=""/>
           </button>
         </div>
       </div>

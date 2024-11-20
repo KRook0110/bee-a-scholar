@@ -23,7 +23,6 @@ const Dashboard = () => {
             const data = await getCollection("scholarships");
             setScholarships(data);
         };
-
         fetchScholarships();
     }, []);
 
@@ -34,7 +33,7 @@ const Dashboard = () => {
     };
 
     return (
-        <div className='manrope'>
+        <div className='manrope overflow-x-hidden'>
             <Header login={userId} searchbar={true} onFind={(value) => {
                 handleNavigate({searchVal: value});
             }} />
@@ -43,7 +42,8 @@ const Dashboard = () => {
                 {/* Highlights */}
                 <section
                   className=
-                  'px-80 pt-2 pb-14 bg-gradient-to-b from-[#1C429A] to-[#3089D6] shadow-md relative'>
+                  'px-80 pt-7 pb-14 bg-gradient-to-b from-[#1C429A] to-[#3089D6] shadow-md relative'>
+
                     <Carousel />
 
                     <div className='absolute w-60 z-0 right-[-3%] top-[-20%]'><img src="icons/honey.png" alt="" /></div>

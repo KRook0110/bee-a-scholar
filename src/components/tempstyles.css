@@ -1,0 +1,21 @@
+@keyframes fromleft {
+  from {
+    left: -100%;
+  }
+  to {
+    left: 0%;
+  }
+}
+@keyframes fromright {
+  from {
+    right: -100%;
+  }
+  to {
+    right: 0%;
+  }
+}
+
+.animate-from-right {
+    animation-name: fromright;
+    animation-duration: 1s;
+}
