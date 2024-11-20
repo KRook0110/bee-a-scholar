@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { getData } from '../config/firebase';
 import { useUser } from '../config/useContext';
 
@@ -10,6 +10,13 @@ const ScholarshipDetail = () => {
 
   const location = useLocation();
   const scholarshipId = location.state?.scholarShipId || null;
+
+  const navigate = useNavigate();
+  const handleNavigate = ({searchVal="", filterVal="all"}) => {
+    navigate('/search-page', {
+      state: {search: searchVal, filter: filterVal}
+    });
+  };
 
   // State to store scholarship data
   const [scholarshipData, setScholarshipData] = useState(null);
@@ -66,7 +73,9 @@ const ScholarshipDetail = () => {
 
   return (
     <div className='manrope min-h-screen'>
-      <Header login={userId} color={false} searchbar={true}/>
+      <Header login={userId} color={false} searchbar={true} onFind={(value) => {
+          handleNavigate({searchVal: value});
+      }}/>
 
       <div className='flex px-10 pt-14 pb-40 gap-5 bg-[#f7f7f7]'>
         <div className='w-full flex flex-col gap-2 px-5'>

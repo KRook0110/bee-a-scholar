@@ -43,6 +43,11 @@ function CalendarPage() {
       state: {scholarShipId: id}
     })
   }
+  const handleSearchbar = ({searchVal="", filterVal="all"}) => {
+    navigate('/search-page', {
+      state: {search: searchVal, filter: filterVal}
+    });
+  };
   
   const [scholarships, setScholarships] = useState([])
   const [pinnedScholarships, setPinnedScholarships] = useState([])
@@ -112,7 +117,9 @@ function CalendarPage() {
 
   return (
   <div className="manrope">
-      <Header login={userId} color={false} searchbar={true}/>
+      <Header login={userId} color={false} searchbar={true} onFind={(value) => {
+          handleSearchbar({searchVal: value});
+      }}/>
       <main className="px-20 py-10 flex flex-col gap-5">
         <div className='flex gap-5 items-center justify-between'>
           <div className="flex gap-5 items-center">
